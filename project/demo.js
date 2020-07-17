@@ -1,12 +1,13 @@
-var scene, camera, renderer, mesh;
+var scene, camera, renderer, mesh, clock;
 var meshFloor, ambientLight, light;
 
-var createWall;
+var crate, crateTexture, crateNormalMap, crateBumpMap, createWall;
 
 var crate1, crateTexture1, crateNormalMap1, crateBumpMap1, createWall1;
 
 var keyboard = {};
 var player = { height: 1.8, speed: 0.2, turnSpeed: Math.PI * 0.02 };
+var USE_WIREFRAME = false;
 
 var loadingScreen = {
   scene: new THREE.Scene(),
@@ -23,7 +24,6 @@ var models = {
   uzi: {
     obj: 'models/uziGold.obj',
     mtl: 'models/uziGold.mtl',
-
     mesh: null,
     castShadow: false,
   },
@@ -41,25 +41,38 @@ var meshes = {};
 function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 1000);
+  clock = new THREE.Clock();
+
+  //   loadingScreen.box.position.set(0, 0, 5);
+  //   loadingScreen.camera.lookAt(loadingScreen.box.position);
+  //   loadingScreen.scene.add(loadingScreen.box);
 
   loadingManager = new THREE.LoadingManager();
   loadingManager.onProgress = function (item, loaded, total) {
-    console.log('item: ', item, ' cargados: ', loaded, ' de: ', total);
+    console.log(item, loaded, total);
   };
   loadingManager.onLoad = function () {
-    console.log('se cargo todos los recursos');
+    console.log('loaded all resources');
     RESOURCES_LOADED = true;
     onResourcesLoaded();
   };
 
+  //   mesh = new THREE.Mesh(
+  //     new THREE.BoxGeometry(1, 1, 1),
+  //     new THREE.MeshPhongMaterial({ color: 0xff4444, wireframe: USE_WIREFRAME })
+  //   );
+  //   mesh.position.y += 1;
+  //   mesh.receiveShadow = true;
+  //   mesh.castShadow = true;
+  //scene.add(mesh);
+
   meshFloor = new THREE.Mesh(
     new THREE.PlaneGeometry(170, 110, 10, 10),
-    new THREE.MeshPhongMaterial({ color: 0xffffff })
+    new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: USE_WIREFRAME })
   );
   meshFloor.rotation.x -= Math.PI / 2;
   meshFloor.receiveShadow = true;
   scene.add(meshFloor);
-  meshFloor.position.set(0, 0, 0);
 
   ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
   scene.add(ambientLight);
@@ -72,40 +85,36 @@ function init() {
   //scene.add(light);
 
   var textureLoader = new THREE.TextureLoader(loadingManager);
+  //   crateTexture = textureLoader.load('images/crate0_diffuse.jpg');
+  //   crateBumpMap = textureLoader.load('images/crate0_bump.jpg');
+  //   crateNormalMap = textureLoader.load('images/crate0_normal.jpg');
   wallTexture = textureLoader.load('images/wall_difuse.jpg');
   wallBumpMap = textureLoader.load('images/wall_bump.jpg');
   wallNormalMap = textureLoader.load('images/wall_normal.jpg');
 
-//  bloques de henry 
-var textureLoader = new THREE.TextureLoader();
-crateTexture1 = new textureLoader.load('images/wall_difuse.jpg');   
-crateBumpMap1 = new textureLoader.load('images/wall_bump.jpg');  
-  
-crate1 = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 10, 110),
-  new THREE.MeshPhongMaterial({
-    color: 0xffffff,
-    map: crateTexture1,
-    bumpMap: crateBumpMap1
-  })
-);  
-  scene.add(crate1);
-  crate1.position.set(-85, 3, 0);
-
-  crate2 = new THREE.Mesh(
-    new THREE.BoxGeometry(170, 10, 1),
+  var textureLoader = new THREE.TextureLoader();
+  crateTexture1 = new textureLoader.load('images/wall_difuse.jpg');   
+  crateBumpMap1 = new textureLoader.load('images/wall_bump.jpg');  
+    
+  crate1 = new THREE.Mesh(
+    new THREE.BoxGeometry(5, 5, 5),
     new THREE.MeshPhongMaterial({
       color: 0xffffff,
       map: crateTexture1,
       bumpMap: crateBumpMap1
     })
   );  
-    scene.add(crate2);
-    crate2.position.set(0, 5, -55);
+    scene.add(crate1);
 
-// fin bloques de henry
-
-
+  crate = new THREE.Mesh(
+    new THREE.BoxGeometry(3, 3, 3),
+    new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      map: crateTexture,
+      bumpMap: crateBumpMap,
+      normalMap: crateNormalMap,
+    })
+  );
   wall = new THREE.Mesh(
     new THREE.BoxGeometry(14, 12, 8),
     new THREE.MeshPhongMaterial({
@@ -116,7 +125,7 @@ crate1 = new THREE.Mesh(
     })
   );
   wallx = new THREE.Mesh(
-    new THREE.BoxGeometry(110, 15, 1),
+    new THREE.BoxGeometry(14, 12, 8),
     new THREE.MeshPhongMaterial({
       color: 0xffffff,
       map: wallTexture,
@@ -125,6 +134,11 @@ crate1 = new THREE.Mesh(
     })
   );
 
+  //scene.add(crate);
+  crate.position.set(2.5, 3 / 2, 5.5);
+  crate.receiveShaadow = true;
+  crate.castShadow = true;
+
   scene.add(wall);
   wall.position.set(10.5, 5, 7.5);
   wall.rotation.y += 1.55;
@@ -132,8 +146,7 @@ crate1 = new THREE.Mesh(
   wall.castShadow = true;
 
   scene.add(wallx);
-  wallx.position.set(83, 6, 0);
-  wallx.rotation.y += Math.PI / 2;
+  wallx.position.set(18, 6, -11);
   // Cargar modelos
 
   for (var _key in models) {
@@ -200,7 +213,7 @@ function onResourcesLoaded() {
   meshes.playerweapon = models.uzi.mesh.clone();
   meshes.playerweapon.position.set(0, 2, 0);
   meshes.playerweapon.scale.set(10, 10, 10);
-  // scene.add(meshes.playerweapon);
+  scene.add(meshes.playerweapon);
 }
 
 function animate() {
@@ -219,6 +232,10 @@ function animate() {
   requestAnimationFrame(animate);
 
   var time = Date.now() * 0.0005;
+
+  //mesh.rotation.x += 0.01;
+  //mesh.rotation.y += 0.02;
+  //crate.rotation.y += 0.01;
 
   if (keyboard[87]) {
     // tecla W
