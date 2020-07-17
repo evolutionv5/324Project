@@ -163,9 +163,9 @@ function onResourcesLoaded() {
   meshes.wall4.rotation.y += 1.56;
   scene.add(meshes.wall4);
   // arma
-  // meshes.playerweapon = models.uzi.mesh.clone();
-  // meshes.playerweapon.position.set(0, 2, 0);
-  // meshes.playerweapon.scale.set(10, 10, 10);
+  meshes.playerweapon = models.uzi.mesh.clone();
+  meshes.playerweapon.position.set(0, 2, 0);
+  meshes.playerweapon.scale.set(10, 10, 10);
   // scene.add(meshes.playerweapon);
 }
 
