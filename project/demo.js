@@ -3,6 +3,8 @@ var meshFloor, ambientLight, light;
 
 var crate, crateTexture, crateNormalMap, crateBumpMap, createWall;
 
+var crate1, crateTexture1, crateNormalMap1, crateBumpMap1, createWall1;
+
 var keyboard = {};
 var player = { height: 1.8, speed: 0.2, turnSpeed: Math.PI * 0.02 };
 var USE_WIREFRAME = false;
@@ -65,7 +67,7 @@ function init() {
   //scene.add(mesh);
 
   meshFloor = new THREE.Mesh(
-    new THREE.PlaneGeometry(50, 30, 10, 10),
+    new THREE.PlaneGeometry(100, 100, 10, 10),
     new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: USE_WIREFRAME })
   );
   meshFloor.rotation.x -= Math.PI / 2;
@@ -80,7 +82,7 @@ function init() {
   light.castShadow = true;
   light.shadow.camera.near = 0.1;
   light.shadow.camera.far = 20;
-  scene.add(light);
+  //scene.add(light);
 
   var textureLoader = new THREE.TextureLoader(loadingManager);
   //   crateTexture = textureLoader.load('images/crate0_diffuse.jpg');
@@ -89,6 +91,20 @@ function init() {
   wallTexture = textureLoader.load('images/wall_difuse.jpg');
   wallBumpMap = textureLoader.load('images/wall_bump.jpg');
   wallNormalMap = textureLoader.load('images/wall_normal.jpg');
+
+  var textureLoader = new THREE.TextureLoader();
+  crateTexture1 = new textureLoader.load('images/wall_difuse.jpg');   
+  crateBumpMap1 = new textureLoader.load('images/wall_bump.jpg');  
+    
+  crate1 = new THREE.Mesh(
+    new THREE.BoxGeometry(5, 5, 5),
+    new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      map: crateTexture1,
+      bumpMap: crateBumpMap1
+    })
+  );  
+    scene.add(crate1);
 
   crate = new THREE.Mesh(
     new THREE.BoxGeometry(3, 3, 3),
