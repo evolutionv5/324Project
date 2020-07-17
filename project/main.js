@@ -53,17 +53,13 @@ function init() {
   };
 
   meshFloor = new THREE.Mesh(
-<<<<<<< HEAD:project/demo.js
-    new THREE.PlaneGeometry(100, 100, 10, 10),
-    new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: USE_WIREFRAME })
-=======
-    new THREE.PlaneGeometry(50, 30, 10, 10),
+    new THREE.PlaneGeometry(170, 110, 10, 10),
     new THREE.MeshPhongMaterial({ color: 0xffffff })
->>>>>>> origin/master:project/main.js
   );
   meshFloor.rotation.x -= Math.PI / 2;
   meshFloor.receiveShadow = true;
   scene.add(meshFloor);
+  meshFloor.position.set(0, 0, 0);
 
   ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
   scene.add(ambientLight);
@@ -80,32 +76,6 @@ function init() {
   wallBumpMap = textureLoader.load('images/wall_bump.jpg');
   wallNormalMap = textureLoader.load('images/wall_normal.jpg');
 
-<<<<<<< HEAD:project/demo.js
-  var textureLoader = new THREE.TextureLoader();
-  crateTexture1 = new textureLoader.load('images/wall_difuse.jpg');   
-  crateBumpMap1 = new textureLoader.load('images/wall_bump.jpg');  
-    
-  crate1 = new THREE.Mesh(
-    new THREE.BoxGeometry(5, 5, 5),
-    new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      map: crateTexture1,
-      bumpMap: crateBumpMap1
-    })
-  );  
-    scene.add(crate1);
-
-  crate = new THREE.Mesh(
-    new THREE.BoxGeometry(3, 3, 3),
-    new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      map: crateTexture,
-      bumpMap: crateBumpMap,
-      normalMap: crateNormalMap,
-    })
-  );
-=======
->>>>>>> origin/master:project/main.js
   wall = new THREE.Mesh(
     new THREE.BoxGeometry(14, 12, 8),
     new THREE.MeshPhongMaterial({
@@ -116,7 +86,7 @@ function init() {
     })
   );
   wallx = new THREE.Mesh(
-    new THREE.BoxGeometry(14, 12, 8),
+    new THREE.BoxGeometry(110, 15, 1),
     new THREE.MeshPhongMaterial({
       color: 0xffffff,
       map: wallTexture,
@@ -132,7 +102,8 @@ function init() {
   wall.castShadow = true;
 
   scene.add(wallx);
-  wallx.position.set(18, 6, -11);
+  wallx.position.set(83, 6, 0);
+  wallx.rotation.y += Math.PI / 2;
   // Cargar modelos
 
   for (var _key in models) {
