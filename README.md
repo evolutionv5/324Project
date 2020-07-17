@@ -7,3 +7,6 @@
 ### Henry Miranda Choque
 
 #### 2020
+
+horizontal 11 lineas
+vertical 17 lineas
