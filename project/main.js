@@ -80,9 +80,52 @@ function init() {
       bumpMap: crateBumpMap1,
     })
   );
-  scene.add(crate1);
+  //scene.add(crate1);
   crate1.position.set(10, 10, 0);
 
+  //cono
+  //var geometry = new THREE.ConeGeometry( 5, 90, 4, 10 );
+  //ConeGeometry (radio: Float , altura: Float , radialSegments: Integer , heightSegments: Integer , openEnded: Boolean , thetaStart: Float , thetaLength: Float )
+  //var material = new THREE.MeshBasicMaterial( {color: 0xccc});
+  //var cone = new THREE.Mesh( geometry, material );
+  //scene.add( cone );
+  //cone.position.set(0,50, 0);
+
+    // esfera
+    //SphereGeometry(radius : Float, widthSegments : Integer, heightSegments : Integer, phiStart : Float, phiLength : Float, thetaStart : Float, thetaLength : Float)
+  var geometry = new THREE.SphereGeometry( 8, 30, 6 );
+  var material = new THREE.MeshBasicMaterial( {color: 0x444444} );
+  var sphere = new THREE.Mesh( geometry, material );
+  //scene.add( sphere );
+ //cone.position.set(0,50, 0);
+    //cilindro largo
+    //CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
+  var geometry = new THREE.CylinderGeometry( 1, 7, 80, 4 );
+  var cylinder = new THREE.Mesh( geometry, material );
+  scene.add( cylinder );
+  cylinder.position.set(1.5,40, 0);
+
+   //cilindro base
+    //CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
+    var geometry1 = new THREE.CylinderGeometry( 10, 10, 4, 20 );
+    var material2 = new THREE.MeshBasicMaterial( {color: 0x555555} );
+    var cylinder1 = new THREE.Mesh( geometry1, material2 );
+    scene.add( cylinder1 );
+    cylinder1.position.set(0,0, 0);
+    var geometry2 = new THREE.CylinderGeometry( 9, 10, 1, 20 );
+    var material3 = new THREE.MeshBasicMaterial( {color: 0xfff} );
+    var cylinder2 = new THREE.Mesh( geometry2, material3 );
+    scene.add( cylinder2 );
+    cylinder2.position.set(0,2.5, 0);
+    var geometry3 = new THREE.CylinderGeometry( 8, 9, 1, 20 );
+    var cylinder3 = new THREE.Mesh( geometry3, material2 );
+    scene.add( cylinder3 );
+    cylinder3.position.set(0,3, 0);
+    //nombre placa 
+    var geometry4 = new THREE.CylinderGeometry( 4, 4, 6, 20 );
+    var cylinder4 = new THREE.Mesh( geometry4, material3 );
+    scene.add( cylinder4 );
+    cylinder4.position.set(-1.8,6, 0);
   // fin bloques de henry
 
   // Cargar modelos
