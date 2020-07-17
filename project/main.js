@@ -77,7 +77,7 @@ function init() {
   wallNormalMap = textureLoader.load('images/wall_normal.jpg');
 
   wall = new THREE.Mesh(
-    new THREE.BoxGeometry(14, 12, 8),
+    new THREE.BoxGeometry(170, 20, 1),
     new THREE.MeshPhongMaterial({
       color: 0xffffff,
       map: wallTexture,
@@ -86,7 +86,7 @@ function init() {
     })
   );
   wallx = new THREE.Mesh(
-    new THREE.BoxGeometry(110, 15, 1),
+    new THREE.BoxGeometry(110, 20, 1),
     new THREE.MeshPhongMaterial({
       color: 0xffffff,
       map: wallTexture,
@@ -96,13 +96,13 @@ function init() {
   );
 
   scene.add(wall);
-  wall.position.set(10.5, 5, 7.5);
-  wall.rotation.y += 1.55;
+  wall.position.set(0, 10, 55);
+  wall.rotation.y -= Math.PI * 2;
   wall.receiveShadow = true;
   wall.castShadow = true;
 
   scene.add(wallx);
-  wallx.position.set(83, 6, 0);
+  wallx.position.set(85, 10, 0);
   wallx.rotation.y += Math.PI / 2;
   // Cargar modelos
 
