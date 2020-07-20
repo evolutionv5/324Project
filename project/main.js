@@ -16,17 +16,8 @@ var loadingScreen = {
     new THREE.MeshBasicMaterial({ color: 0x4444ff })
   ),
 };
-var loadingManager = null;
-var RESOURCES_LOADED = false;
 
-var models = {
-  wall: {
-    obj: 'models/wall.obj',
-    mtl: 'models/wall.mtl',
-    mesh: null,
-    map: createWall,
-  },
-};
+
 
 // Meshes index
 var meshes = {};
@@ -35,15 +26,8 @@ function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 1000);
 
-  loadingManager = new THREE.LoadingManager();
-  loadingManager.onProgress = function (item, loaded, total) {
-    console.log('item: ', item, ' cargados: ', loaded, ' de: ', total);
-  };
-  loadingManager.onLoad = function () {
-    console.log('se cargo todos los recursos');
-    RESOURCES_LOADED = true;
-    onResourcesLoaded();
-  };
+  
+  
 
   meshFloor = new THREE.Mesh(
     new THREE.PlaneGeometry(160, 100, 10, 10),
@@ -63,14 +47,7 @@ function init() {
   light.shadow.camera.far = 20;
   //scene.add(light);
 
-  var textureLoader = new THREE.TextureLoader(loadingManager);
-  wallTexture = textureLoader.load('images/wall_difuse.jpg');
-  wallBumpMap = textureLoader.load('images/wall_bump.jpg');
-  wallNormalMap = textureLoader.load('images/wall_normal.jpg');
-
-  //  bloques de henry
-  crateTexture1 = new textureLoader.load('images/wall_difuse.jpg');
-  crateBumpMap1 = new textureLoader.load('images/wall_bump.jpg');
+  
 
   crate1 = new THREE.Mesh(
     new THREE.BoxGeometry(20, 20, 20),
@@ -96,7 +73,7 @@ function init() {
   var geometry = new THREE.SphereGeometry( 8, 30, 6 );
   var material = new THREE.MeshBasicMaterial( {color: 0x444444} );
   var sphere = new THREE.Mesh( geometry, material );
-  //scene.add( sphere );
+  scene.add( sphere );
  //cone.position.set(0,50, 0);
     //cilindro largo
     //CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
@@ -104,6 +81,19 @@ function init() {
   var cylinder = new THREE.Mesh( geometry, material );
   scene.add( cylinder );
   cylinder.position.set(1.5,40, 0);
+  cylinder.rotation.set(0,45, 0);
+  var delmedio = new THREE.CylinderGeometry( 1, 1.5, 56, 4 );
+  var colornegro = new THREE.MeshBasicMaterial( {color: 0xdddddd} );
+  var cmedio = new THREE.Mesh( delmedio, colornegro );
+  scene.add( cmedio );
+  cmedio.position.set(-1.5,36, 0);
+  cmedio.rotation.set(0,0, -0.05);
+  //la punta arriba
+  var punta = new THREE.CylinderGeometry( 0.2, 0.2, 30, 4 );
+  var cpunta = new THREE.Mesh( punta, colornegro );
+  scene.add( cpunta );
+  cpunta.position.set(0.8,90, 0);
+  cpunta.rotation.set(0,0, -0.05);
 
    //cilindro base
     //CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
@@ -126,38 +116,101 @@ function init() {
     var cylinder4 = new THREE.Mesh( geometry4, material3 );
     scene.add( cylinder4 );
     cylinder4.position.set(-1.8,6, 0);
+
+    //suelo redondo
+    var sueloredon = new THREE.CylinderGeometry( 20, 20, 0.5 , 20 );
+    var material2 = new THREE.MeshBasicMaterial( {color: 0x555555} );
+    var csueloredon = new THREE.Mesh(sueloredon, material2 );
+    scene.add( csueloredon );
+    csueloredon.position.set(0,-0.05, 0);
+
+    //base del soldado caido
+    var basesoldado = new THREE.CylinderGeometry( 7, 12, 6 , 4 );
+    var colorazul = new THREE.MeshBasicMaterial( {color: 0xfff} );
+    var cbasesoldado = new THREE.Mesh(basesoldado, colorazul );
+    scene.add( cbasesoldado );
+    cbasesoldado.position.set(-35,0, 0);
+    cbasesoldado.rotation.set(0 ,40 ,0 );
+    
+    //piedras del Soldado caido
+    //BoxGeometry(width : Float, height : Float, depth : Float, widthSegments : Integer, heightSegments : Integer, depthSegments : Integer)
+    var torzo = new THREE.BoxGeometry( 6, 2, 4 );
+    var matorzo = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    var cubetorzo = new THREE.Mesh( torzo, matorzo );
+    scene.add( cubetorzo );
+    cubetorzo.position.set(-35,4, 0);
+    cubetorzo.rotation.set(0 ,0 ,0 );
+    //cabeza
+    var cabeza = new THREE.SphereGeometry( 1, 10, 10 );
+    var spherecabeza = new THREE.Mesh( cabeza, colorazul );
+    scene.add( spherecabeza );
+    spherecabeza.position.set(-39,4.8, 0);
+    //cuerpo
+    var cuerpo = new THREE.BoxGeometry( 5, 1.8, 3 );
+    var cubecuerpo = new THREE.Mesh( cuerpo, material2 );
+    scene.add( cubecuerpo );
+    cubecuerpo.position.set(-36,5.5, 0);
+    //brazo izq
+    var brazoi = new THREE.BoxGeometry( 1, 2, 1 );
+    var cubebrazoi = new THREE.Mesh( brazoi, material2 );
+    scene.add( cubebrazoi );
+    cubebrazoi.position.set(-38.6,4.7, 1.4);
+    cubebrazoi.rotation.set(0 ,1 ,-0.3 );
+    //mano izq
+    var manoi = new THREE.BoxGeometry( 1, 2.4, 1 );
+    var cubemanoi = new THREE.Mesh( manoi, material2 );
+    scene.add( cubemanoi );
+    cubemanoi.position.set(-39.6,3.5, 1.4);
+    cubemanoi.rotation.set(0 ,-0.8 ,-1.4 );
+    //brazo der
+    var brazod = new THREE.BoxGeometry( 1, 2, 1 );
+    var cubebrazod = new THREE.Mesh( brazod, colornegro );
+    scene.add( cubebrazod );
+    cubebrazod.position.set(-38,5.1, -2.4);
+    cubebrazod.rotation.set(1 ,0.5 ,0.5 );
+    //mano der
+    var manod = new THREE.BoxGeometry( 1, 2.4, 1 );
+    var cubemanod = new THREE.Mesh( manod, colornegro );
+    scene.add( cubemanod );
+    cubemanod.position.set(-37.5,3.8, -3);
+    cubemanod.rotation.set(-0.5 ,0 ,0 );
+
+    //parte baja
+    var partec = new THREE.BoxGeometry( 2, 2, 3 );
+    var cubepartec = new THREE.Mesh( partec, colornegro );
+    scene.add( cubepartec );
+    cubepartec.position.set(-32.5,5.5, 0 );
+    cubepartec.rotation.set(0 ,0 ,0 );
+
+    //pierna izq
+    var manod = new THREE.BoxGeometry( 1, 3 , 1 );
+    var cubemanod = new THREE.Mesh( manod, colornegro );
+    scene.add( cubemanod );
+    cubemanod.position.set(-31,4.8, -1.4);
+    cubemanod.rotation.set(0.5 ,0 ,0.4 );
+    //pie izq
+    var manod = new THREE.BoxGeometry( 1, 3 , 1 );
+    var cubemanod = new THREE.Mesh( manod, colornegro );
+    scene.add( cubemanod );
+    cubemanod.position.set(-29.6,3.5, -1 );
+    cubemanod.rotation.set(-1 ,0 ,0.8 );
+    //pierna der
+    var manod = new THREE.BoxGeometry( 1, 3 , 1 );
+    var cubemanod = new THREE.Mesh( manod, colornegro );
+    scene.add( cubemanod );
+    cubemanod.position.set(-31,4.8, 1.4);
+    cubemanod.rotation.set(-0.5 ,0 ,0.4 );
+    //pie der
+    var manod = new THREE.BoxGeometry( 1, 3 , 1 );
+    var cubemanod = new THREE.Mesh( manod, colornegro );
+    scene.add( cubemanod );
+    cubemanod.position.set(-29.6,3.5, 2);
+    cubemanod.rotation.set(-1.5 ,0 ,1.8 );
   // fin bloques de henry
 
-  // Cargar modelos
 
-  for (var _key in models) {
-    (function (key) {
-      var mtlLoader = new THREE.MTLLoader(loadingManager);
-      mtlLoader.load(models[key].mtl, function (materials) {
-        materials.preload();
 
-        var objLoader = new THREE.OBJLoader(loadingManager);
-
-        objLoader.setMaterials(materials);
-        objLoader.load(models[key].obj, function (mesh) {
-          mesh.traverse(function (node) {
-            if (node instanceof THREE.Mesh) {
-              if ('castShadow' in models[key])
-                node.castShadow = models[key].castShadow;
-              else node.castShadow = true;
-
-              if ('receiveShadow' in models[key])
-                node.receiveShadow = models[key].receiveShadow;
-              else node.receiveShadow = true;
-            }
-          });
-          models[key].mesh = mesh;
-        });
-      });
-    })(_key);
-  }
-
-  camera.position.set(0, player.height, -5);
+  camera.position.set(-50, player.height, 10);
   camera.lookAt(new THREE.Vector3(0, player.height, 0));
 
   renderer = new THREE.WebGLRenderer();
@@ -179,21 +232,9 @@ function onResourcesLoaded() {
 }
 
 function animate() {
-  // Play the loading screen until resources are loaded.
-  if (RESOURCES_LOADED == false) {
-    requestAnimationFrame(animate);
-
-    loadingScreen.box.position.x -= 0.05;
-    if (loadingScreen.box.position.x < -10) loadingScreen.box.position.x = 10;
-    loadingScreen.box.position.y = Math.sin(loadingScreen.box.position.x);
-
-    renderer.render(loadingScreen.scene, loadingScreen.camera);
-    return;
-  }
+  
 
   requestAnimationFrame(animate);
-
-  var time = Date.now() * 0.0005;
 
   if (keyboard[87]) {
     // tecla W
