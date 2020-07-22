@@ -6,7 +6,8 @@ var createWall;
 var crate1, crateTexture1, crateNormalMap1, crateBumpMap1, createWall1;
 
 var keyboard = {};
-var player = { height: 1.8, speed: 0.2, turnSpeed: Math.PI * 0.02 };
+//height 1.8
+var player = { height: 150, speed: 0.2, turnSpeed: Math.PI * 0.02 };
 
 var loadingScreen = {
   scene: new THREE.Scene(),
@@ -30,7 +31,8 @@ function init() {
   
 
   meshFloor = new THREE.Mesh(
-    new THREE.PlaneGeometry(160, 100, 10, 10),
+    //160
+    new THREE.PlaneGeometry(200, 200 , 10, 10),
     new THREE.MeshPhongMaterial({ color: 0xffffff })
   );
   meshFloor.rotation.x -= Math.PI / 2;
@@ -73,26 +75,33 @@ function init() {
   var geometry = new THREE.SphereGeometry( 8, 30, 6 );
   var material = new THREE.MeshBasicMaterial( {color: 0x444444} );
   var sphere = new THREE.Mesh( geometry, material );
-  scene.add( sphere );
+  //scene.add( sphere );
  //cone.position.set(0,50, 0);
     //cilindro largo
     //CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
-  var geometry = new THREE.CylinderGeometry( 1, 7, 80, 4 );
+  var geometry = new THREE.CylinderGeometry( 3, 9, 140, 4 );
   var cylinder = new THREE.Mesh( geometry, material );
   scene.add( cylinder );
-  cylinder.position.set(1.5,40, 0);
+  cylinder.position.set(1.5,70, 0);
   cylinder.rotation.set(0,45, 0);
-  var delmedio = new THREE.CylinderGeometry( 1, 1.5, 56, 4 );
+  var delmedio = new THREE.CylinderGeometry( 3, 3, 100, 4 );
   var colornegro = new THREE.MeshBasicMaterial( {color: 0xdddddd} );
   var cmedio = new THREE.Mesh( delmedio, colornegro );
   scene.add( cmedio );
-  cmedio.position.set(-1.5,36, 0);
-  cmedio.rotation.set(0,0, -0.05);
+  cmedio.position.set(-2,40, 0);
+  cmedio.rotation.set(0,0.45, -0.03);
+  //piramide
+  var geometry = new THREE.ConeGeometry( 3.1, 3.5, 4 );
+  var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+  var cone = new THREE.Mesh( geometry, material );
+  scene.add( cone );
+  cone.position.set( 1.5, 142, 0);
+  cone.rotation.set(0, 45, 0);
   //la punta arriba
-  var punta = new THREE.CylinderGeometry( 0.2, 0.2, 30, 4 );
+  var punta = new THREE.CylinderGeometry( 0.2, 0.2, 40, 4 );
   var cpunta = new THREE.Mesh( punta, colornegro );
   scene.add( cpunta );
-  cpunta.position.set(0.8,90, 0);
+  cpunta.position.set(-0.5,145, 0);
   cpunta.rotation.set(0,0, -0.05);
 
    //cilindro base
@@ -112,10 +121,10 @@ function init() {
     scene.add( cylinder3 );
     cylinder3.position.set(0,3, 0);
     //nombre placa 
-    var geometry4 = new THREE.CylinderGeometry( 4, 4, 6, 20 );
+    var geometry4 = new THREE.CylinderGeometry( 2.5, 2.5, 6, 20 );
     var cylinder4 = new THREE.Mesh( geometry4, material3 );
     scene.add( cylinder4 );
-    cylinder4.position.set(-1.8,6, 0);
+    cylinder4.position.set(-1.8,6, 0.5);
 
     //suelo redondo
     var sueloredon = new THREE.CylinderGeometry( 20, 20, 0.5 , 20 );
@@ -206,11 +215,84 @@ function init() {
     scene.add( cubemanod );
     cubemanod.position.set(-29.6,3.5, 2);
     cubemanod.rotation.set(-1.5 ,0 ,1.8 );
+
+
+    //edificio 
+    var edificio = new THREE.BoxGeometry( 3, 140 , 110 );
+    var cubeedificio = new THREE.Mesh( edificio, colornegro );
+    scene.add( cubeedificio );
+    cubeedificio.position.set(90,35, 2);
+    //puerta de este edificio
+    var edificio = new THREE.BoxGeometry( 2, 20 , 30 );
+    var cubeedificio = new THREE.Mesh( edificio, colorazul );
+    scene.add( cubeedificio );
+    cubeedificio.position.set(88  ,15, 2);
+    //puerta grande
+    var edificio = new THREE.BoxGeometry( 2, 50 , 90 );
+    var cubeedificio = new THREE.Mesh( edificio, material2 );
+    scene.add( cubeedificio );
+    cubeedificio.position.set(89  ,15, 2);
+    var edificio = new THREE.BoxGeometry( 2, 45 , 50 );
+    var cubeedificio = new THREE.Mesh( edificio, material );
+    scene.add( cubeedificio );
+    cubeedificio.position.set(88.5  ,15, 2);
+    //ventanas 
+    // var edificio = new THREE.BoxGeometry( 2, 13 , 10 );
+    // var cubeedificio = new THREE.Mesh( edificio, colorazul );
+    // scene.add( cubeedificio );
+    // cubeedificio.position.set(88,50, -30);
+    var incre=-48;
+    for (let i = 0; i < 5; i++) {
+      var edificio = new THREE.BoxGeometry( 2, 13 , 10 );
+      var cubeedificio = new THREE.Mesh( edificio, colorazul );
+      scene.add( cubeedificio );
+      if(i == 1 || i == 4){
+        incre+=21;
+      }
+      else{
+        incre+=14;
+      }
+      cubeedificio.position.set(88,47, incre);
+    }
+
+    var incre=-48;
+    for (let i = 0; i < 5; i++) {
+      var edificio = new THREE.BoxGeometry( 2, 13 , 10 );
+      var cubeedificio = new THREE.Mesh( edificio, colorazul );
+      scene.add( cubeedificio );
+      if(i == 1 || i == 4){
+        incre+=21;
+      }
+      else{
+        incre+=14;
+      }
+      cubeedificio.position.set(88,68, incre);
+    }
+    var incre=-48;
+    for (let i = 0; i < 5; i++) {
+      var edificio = new THREE.BoxGeometry( 2, 13 , 10 );
+      var cubeedificio = new THREE.Mesh( edificio, colorazul );
+      scene.add( cubeedificio );
+      if(i == 1 || i == 4){
+        incre+=21;
+      }
+      else{
+        incre+=14;
+      }
+      cubeedificio.position.set(88,90, incre);
+    }
+
+    //edificio ingenieria
+    var edificio = new THREE.BoxGeometry( 300, 140 , 3 );
+    var cubeedificio = new THREE.Mesh( edificio, colornegro );
+    scene.add( cubeedificio );
+    cubeedificio.position.set(-100,35,-100);
+
   // fin bloques de henry
 
 
-
-  camera.position.set(-50, player.height, 10);
+  //86,15, 2
+  camera.position.set(50, player.height, 10);
   camera.lookAt(new THREE.Vector3(0, player.height, 0));
 
   renderer = new THREE.WebGLRenderer();

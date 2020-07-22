@@ -6,6 +6,7 @@ var crate, crateTexture, crateNormalMap, crateBumpMap, createWall;
 var crate1, crateTexture1, crateNormalMap1, crateBumpMap1, createWall1;
 
 var keyboard = {};
+// height =1.8
 var player = { height: 1.8, speed: 0.2, turnSpeed: Math.PI * 0.02 };
 var USE_WIREFRAME = false;
 
@@ -43,28 +44,6 @@ function init() {
   camera = new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 1000);
   clock = new THREE.Clock();
 
-  //   loadingScreen.box.position.set(0, 0, 5);
-  //   loadingScreen.camera.lookAt(loadingScreen.box.position);
-  //   loadingScreen.scene.add(loadingScreen.box);
-
-  loadingManager = new THREE.LoadingManager();
-  loadingManager.onProgress = function (item, loaded, total) {
-    console.log(item, loaded, total);
-  };
-  loadingManager.onLoad = function () {
-    console.log('loaded all resources');
-    RESOURCES_LOADED = true;
-    onResourcesLoaded();
-  };
-
-  //   mesh = new THREE.Mesh(
-  //     new THREE.BoxGeometry(1, 1, 1),
-  //     new THREE.MeshPhongMaterial({ color: 0xff4444, wireframe: USE_WIREFRAME })
-  //   );
-  //   mesh.position.y += 1;
-  //   mesh.receiveShadow = true;
-  //   mesh.castShadow = true;
-  //scene.add(mesh);
 
   meshFloor = new THREE.Mesh(
     new THREE.PlaneGeometry(170, 110, 10, 10),
@@ -84,17 +63,7 @@ function init() {
   light.shadow.camera.far = 20;
   //scene.add(light);
 
-  var textureLoader = new THREE.TextureLoader(loadingManager);
-  //   crateTexture = textureLoader.load('images/crate0_diffuse.jpg');
-  //   crateBumpMap = textureLoader.load('images/crate0_bump.jpg');
-  //   crateNormalMap = textureLoader.load('images/crate0_normal.jpg');
-  wallTexture = textureLoader.load('images/wall_difuse.jpg');
-  wallBumpMap = textureLoader.load('images/wall_bump.jpg');
-  wallNormalMap = textureLoader.load('images/wall_normal.jpg');
 
-  var textureLoader = new THREE.TextureLoader();
-  crateTexture1 = new textureLoader.load('images/wall_difuse.jpg');   
-  crateBumpMap1 = new textureLoader.load('images/wall_bump.jpg');  
     
   crate1 = new THREE.Mesh(
     new THREE.BoxGeometry(5, 5, 5),
@@ -115,69 +84,11 @@ function init() {
       normalMap: crateNormalMap,
     })
   );
-  wall = new THREE.Mesh(
-    new THREE.BoxGeometry(14, 12, 8),
-    new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      map: wallTexture,
-      bumpMap: wallBumpMap,
-      normalMap: wallNormalMap,
-    })
-  );
-  wallx = new THREE.Mesh(
-    new THREE.BoxGeometry(14, 12, 8),
-    new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      map: wallTexture,
-      bumpMap: wallBumpMap,
-      normalMap: wallNormalMap,
-    })
-  );
-
-  //scene.add(crate);
-  crate.position.set(2.5, 3 / 2, 5.5);
-  crate.receiveShaadow = true;
-  crate.castShadow = true;
-
-  scene.add(wall);
-  wall.position.set(10.5, 5, 7.5);
-  wall.rotation.y += 1.55;
-  wall.receiveShadow = true;
-  wall.castShadow = true;
-
-  scene.add(wallx);
-  wallx.position.set(18, 6, -11);
-  // Cargar modelos
-
-  for (var _key in models) {
-    (function (key) {
-      var mtlLoader = new THREE.MTLLoader(loadingManager);
-      mtlLoader.load(models[key].mtl, function (materials) {
-        materials.preload();
-
-        var objLoader = new THREE.OBJLoader(loadingManager);
-
-        objLoader.setMaterials(materials);
-        objLoader.load(models[key].obj, function (mesh) {
-          mesh.traverse(function (node) {
-            if (node instanceof THREE.Mesh) {
-              if ('castShadow' in models[key])
-                node.castShadow = models[key].castShadow;
-              else node.castShadow = true;
-
-              if ('receiveShadow' in models[key])
-                node.receiveShadow = models[key].receiveShadow;
-              else node.receiveShadow = true;
-            }
-          });
-          models[key].mesh = mesh;
-        });
-      });
-    })(_key);
-  }
+  
+  
 
   camera.position.set(0, player.height, -5);
-  camera.lookAt(new THREE.Vector3(0, player.height, 0));
+  camera.lookAt(new THREE.Vector3(0, player.height, -5));
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(1280, 720);
@@ -190,31 +101,7 @@ function init() {
   animate();
 }
 
-function onResourcesLoaded() {
-  meshes.wall1 = models.wall.mesh.clone();
-  meshes.wall2 = models.wall.mesh.clone();
-  meshes.wall3 = models.wall.mesh.clone();
-  meshes.wall4 = models.wall.mesh.clone();
 
-  meshes.wall1.position.set(-14, -1, 8);
-  scene.add(meshes.wall1);
-
-  meshes.wall2.position.set(-14, -1, -4);
-  scene.add(meshes.wall2);
-
-  meshes.wall3.position.set(-8, -1, 14);
-  meshes.wall3.rotation.y += 1.55;
-  scene.add(meshes.wall3);
-
-  meshes.wall4.position.set(3.9, -1, 14.2);
-  meshes.wall4.rotation.y += 1.56;
-  scene.add(meshes.wall4);
-  // arma
-  meshes.playerweapon = models.uzi.mesh.clone();
-  meshes.playerweapon.position.set(0, 2, 0);
-  meshes.playerweapon.scale.set(10, 10, 10);
-  scene.add(meshes.playerweapon);
-}
 
 function animate() {
   // Play the loading screen until resources are loaded.
