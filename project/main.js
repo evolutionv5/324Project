@@ -7,19 +7,26 @@ var crate1, crateTexture1, crateNormalMap1, crateBumpMap1, createWall1;
 
 var keyboard = {};
 //height 1.8
-var player = { height: 150, speed: 0.2, turnSpeed: Math.PI * 0.02 };
+var player = { height: 5, speed: 1, turnSpeed: Math.PI * 0.02 };
 
-var loadingScreen = {
-  scene: new THREE.Scene(),
-  camera: new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 100),
-  box: new THREE.Mesh(
-    new THREE.BoxGeometry(0.5, 0.5, 0.5),
-    new THREE.MeshBasicMaterial({ color: 0x4444ff })
-  ),
-};
+//colores
+var plomoclaro = new THREE.MeshBasicMaterial({ color: 0x9DA3A4 });
+var verde = new THREE.MeshBasicMaterial({ color: 0x32965D });
+var verdeclaro = new THREE.MeshBasicMaterial({ color: 0x68A357 });
+var concreto = new THREE.MeshBasicMaterial({ color: 0x5F7367 });
+var blanco = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-// Meshes index
-var meshes = {};
+var plomoraton = new THREE.MeshBasicMaterial({ color: 0x59656F });
+var verdeinge = new THREE.MeshBasicMaterial({ color: 0x216869 });
+var rojop = new THREE.MeshBasicMaterial({ color: 0xAC3931 });
+var azulm = new THREE.MeshBasicMaterial({ color: 0x2374AB });
+// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
+// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
+// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
+// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
+// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
+
+
 
 function init() {
   scene = new THREE.Scene();
@@ -27,7 +34,7 @@ function init() {
 
   meshFloor = new THREE.Mesh(
     //160
-    new THREE.PlaneGeometry(200, 200, 10, 10),
+    new THREE.PlaneGeometry(500, 200, 10, 10),
     new THREE.MeshPhongMaterial({ color: 0xffffff })
   );
   meshFloor.rotation.x -= Math.PI / 2;
@@ -272,10 +279,84 @@ function init() {
   }
 
   //edificio ingenieria
-  edificio = new THREE.BoxGeometry(300, 140, 3);
+  edificio = new THREE.BoxGeometry(280, 150, 3);
   cubeedificio = new THREE.Mesh(edificio, colornegro);
   scene.add(cubeedificio);
-  cubeedificio.position.set(-100, 35, -100);
+  cubeedificio.position.set(-100, 60, -100);
+
+  //barra de arriba
+  edificio = new THREE.BoxGeometry(280, 8, 3);
+  cubeedificio = new THREE.Mesh(edificio, verdeinge);
+  scene.add(cubeedificio);
+  cubeedificio.position.set(-100, 141, -98);
+
+  //14 palos horizontales
+
+  var count =38;
+  for (let i = 0; i < 13; i++) {
+    edificio = new THREE.BoxGeometry(2, 100, 3);
+    cubeedificio = new THREE.Mesh(edificio, rojop);
+    scene.add(cubeedificio);
+    cubeedificio.position.set(count, 85, -99);
+    count-=23;
+  }
+
+  //palos verticales
+  count =135;
+  for (let i = 0; i < 6; i++) {
+    edificio = new THREE.BoxGeometry(280, 5, 3);
+    cubeedificio = new THREE.Mesh(edificio, verdeinge);
+    scene.add(cubeedificio);
+    cubeedificio.position.set(-100, count, -98);
+    count-=20;
+  }
+
+  //auto
+    edificio = new THREE.BoxGeometry(30, 14, 16);
+    cubeedificio = new THREE.Mesh(edificio, azulm);
+    scene.add(cubeedificio);
+    cubeedificio.position.set(10, 9, 80);
+    //nariz
+    edificio = new THREE.BoxGeometry(10, 6.5, 16);
+    cubeedificio = new THREE.Mesh(edificio, azulm);
+    scene.add(cubeedificio);
+    cubeedificio.position.set(-10, 5.2, 80);
+    
+    //ruedas
+    // delanteras
+    geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+    cylinder = new THREE.Mesh(geometry, matorzo);
+   scene.add(cylinder);
+   cylinder.position.set(0, 2.5, 87);
+   cylinder.rotation.set(0, 1.5, 1.5);
+
+   geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+   cylinder = new THREE.Mesh(geometry, matorzo);
+  scene.add(cylinder);
+  cylinder.position.set(0, 2.5, 73);
+  cylinder.rotation.set(0, 1.5, 1.5);
+  //traseras
+  geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+    cylinder = new THREE.Mesh(geometry, matorzo);
+   scene.add(cylinder);
+   cylinder.position.set(20, 2.5, 87);
+   cylinder.rotation.set(0, 1.5, 1.5);
+
+   geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+   cylinder = new THREE.Mesh(geometry, matorzo);
+  scene.add(cylinder);
+  cylinder.position.set(20, 2.5, 73);
+  cylinder.rotation.set(0, 1.5, 1.5);
+
+
+  // aveni  da mariscal santa cruz
+  plano(500, 40, plomoraton, 0, 0.05, 85, -0.5*Math.PI, 0, 0);
+  count = 250;
+  for (let i = 0; i < 11; i++) {
+    plano(20, 2, blanco, count, 0.06, 85, -0.5*Math.PI, 0, 0);
+    count-=50;
+    
+  }
 
   // fin bloques de henry
 
@@ -348,6 +429,16 @@ function keyDown(event) {
 function keyUp(event) {
   keyboard[event.keyCode] = false;
 }
+
+function plano(ancho, alto, color, x, y, z,xx, yy, zz){
+  let planeGeo = new THREE.PlaneGeometry(ancho, alto);
+  let plane = new THREE.Mesh(planeGeo, color);
+  scene.add(plane);
+  plane.position.set(x, y, z);
+  plane.rotation.set(xx, yy, zz);
+}
+
+
 
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
