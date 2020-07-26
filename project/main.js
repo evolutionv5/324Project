@@ -20,10 +20,10 @@ var plomoraton = new THREE.MeshBasicMaterial({ color: 0x59656F });
 var verdeinge = new THREE.MeshBasicMaterial({ color: 0x216869 });
 var rojop = new THREE.MeshBasicMaterial({ color: 0xAC3931 });
 var azulm = new THREE.MeshBasicMaterial({ color: 0x2374AB });
-// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
-// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
-// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
-// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
+var oscuro = new THREE.MeshBasicMaterial({ color: 0x04151F });
+var veis = new THREE.MeshBasicMaterial({ color: 0xD3B88C });
+var blancosu = new THREE.MeshBasicMaterial({ color: 0xF4F2F3 });
+var veispuerta = new THREE.MeshBasicMaterial({ color: 0xBCA371 });
 // var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
 
 
@@ -217,22 +217,22 @@ function init() {
   cubemanod.rotation.set(-1.5, 0, 1.8);
 
   //edificio
-  var edificio = new THREE.BoxGeometry(3, 140, 110);
-  var cubeedificio = new THREE.Mesh(edificio, colornegro);
+  var edificio = new THREE.BoxGeometry(3, 140, 90);
+  var cubeedificio = new THREE.Mesh(edificio, veis);
   scene.add(cubeedificio);
   cubeedificio.position.set(90, 35, 2);
-  //puerta de este edificio
-  edificio = new THREE.BoxGeometry(2, 20, 30);
-  cubeedificio = new THREE.Mesh(edificio, colorazul);
+  //puerta de este edificio chica
+  edificio = new THREE.BoxGeometry(2, 25, 30);
+  cubeedificio = new THREE.Mesh(edificio, oscuro);
   scene.add(cubeedificio);
   cubeedificio.position.set(88, 15, 2);
-  //puerta grande
-  edificio = new THREE.BoxGeometry(2, 50, 90);
-  cubeedificio = new THREE.Mesh(edificio, material2);
+  //frontis de la puerta grande
+  edificio = new THREE.BoxGeometry(2, 53, 70);
+  cubeedificio = new THREE.Mesh(edificio, veispuerta);
   scene.add(cubeedificio);
   cubeedificio.position.set(89, 15, 2);
-  edificio = new THREE.BoxGeometry(2, 45, 50);
-  cubeedificio = new THREE.Mesh(edificio, material);
+  edificio = new THREE.BoxGeometry(2, 45, 55);
+  cubeedificio = new THREE.Mesh(edificio, veis);
   scene.add(cubeedificio);
   cubeedificio.position.set(88.5, 15, 2);
   //ventanas
@@ -240,40 +240,40 @@ function init() {
   // var cubeedificio = new THREE.Mesh( edificio, colorazul );
   // scene.add( cubeedificio );
   // cubeedificio.position.set(88,50, -30);
-  var incre = -48;
+  var incre = -42.5;
   for (let i = 0; i < 5; i++) {
-    edificio = new THREE.BoxGeometry(2, 13, 10);
-    cubeedificio = new THREE.Mesh(edificio, colorazul);
+    edificio = new THREE.BoxGeometry(2, 10, 8);
+    cubeedificio = new THREE.Mesh(edificio, blancosu);
     scene.add(cubeedificio);
     if (i == 1 || i == 4) {
-      incre += 21;
+      incre += 20;
     } else {
-      incre += 14;
+      incre += 12 ;
     }
     cubeedificio.position.set(88, 47, incre);
   }
 
-  incre = -48;
+  incre = -42.5;
   for (let i = 0; i < 5; i++) {
-    edificio = new THREE.BoxGeometry(2, 13, 10);
-    cubeedificio = new THREE.Mesh(edificio, colorazul);
+    edificio = new THREE.BoxGeometry(2, 10, 8);
+    cubeedificio = new THREE.Mesh(edificio, blancosu);
     scene.add(cubeedificio);
     if (i == 1 || i == 4) {
-      incre += 21;
+      incre += 20;
     } else {
-      incre += 14;
+      incre += 12;
     }
     cubeedificio.position.set(88, 68, incre);
   }
-  incre = -48;
+  incre = -42.5;
   for (let i = 0; i < 5; i++) {
-    edificio = new THREE.BoxGeometry(2, 13, 10);
-    cubeedificio = new THREE.Mesh(edificio, colorazul);
+    edificio = new THREE.BoxGeometry(2, 10, 8);
+    cubeedificio = new THREE.Mesh(edificio, blancosu);
     scene.add(cubeedificio);
     if (i == 1 || i == 4) {
-      incre += 21;
+      incre += 20;
     } else {
-      incre += 14;
+      incre += 12;
     }
     cubeedificio.position.set(88, 90, incre);
   }
@@ -325,25 +325,25 @@ function init() {
     //ruedas
     // delanteras
     geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
-    cylinder = new THREE.Mesh(geometry, matorzo);
+    cylinder = new THREE.Mesh(geometry, oscuro);
    scene.add(cylinder);
    cylinder.position.set(0, 2.5, 87);
    cylinder.rotation.set(0, 1.5, 1.5);
 
    geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
-   cylinder = new THREE.Mesh(geometry, matorzo);
+   cylinder = new THREE.Mesh(geometry, oscuro);
   scene.add(cylinder);
   cylinder.position.set(0, 2.5, 73);
   cylinder.rotation.set(0, 1.5, 1.5);
   //traseras
   geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
-    cylinder = new THREE.Mesh(geometry, matorzo);
+    cylinder = new THREE.Mesh(geometry, oscuro);
    scene.add(cylinder);
    cylinder.position.set(20, 2.5, 87);
    cylinder.rotation.set(0, 1.5, 1.5);
 
    geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
-   cylinder = new THREE.Mesh(geometry, matorzo);
+   cylinder = new THREE.Mesh(geometry, oscuro);
   scene.add(cylinder);
   cylinder.position.set(20, 2.5, 73);
   cylinder.rotation.set(0, 1.5, 1.5);
@@ -354,9 +354,27 @@ function init() {
   count = 250;
   for (let i = 0; i < 11; i++) {
     plano(20, 2, blanco, count, 0.06, 85, -0.5*Math.PI, 0, 0);
-    count-=50;
-    
+    count-=50; 
   }
+  // calle para arriba izq
+  plano(30, 300, plomoraton, 65, 0.05, 85, -0.5*Math.PI, 0, 0);
+  
+  // calle para la camacho 
+  plano(600, 35, plomoraton, 0, 0.05, -65, -0.5*Math.PI, 0, 0);
+  count = 240;
+  for (let i = 0; i < 12; i++) {
+    plano(20, 2, blanco, count, 0.06, -65, -0.5*Math.PI, 0, 0);
+    count-=50; 
+  }
+
+  //piso de la plaza
+  geometry = new THREE.CylinderGeometry(42, 50, 1, 3);
+  cylinder = new THREE.Mesh(geometry, blanco);
+   scene.add(cylinder);
+   cylinder.position.set(20, 0.5, 0);
+   cylinder.rotation.set(0, -0.5*Math.PI, 0);
+   
+
 
   // fin bloques de henry
 
