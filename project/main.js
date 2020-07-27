@@ -34,7 +34,7 @@ function init() {
 
   meshFloor = new THREE.Mesh(
     //160
-    new THREE.PlaneGeometry(500, 200, 10, 10),
+    new THREE.PlaneGeometry(800, 300, 10, 10),
     new THREE.MeshPhongMaterial({ color: 0xffffff })
   );
   meshFloor.rotation.x -= Math.PI / 2;
@@ -102,7 +102,7 @@ function init() {
   var cpunta = new THREE.Mesh(punta, colornegro);
   scene.add(cpunta);
   cpunta.position.set(-0.5, 145, 0);
-  cpunta.rotation.set(0, 0, -0.05);
+  cpunta.rotation.set(0, 0, 0);
 
   //cilindro base
   //CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
@@ -132,6 +132,12 @@ function init() {
   var csueloredon = new THREE.Mesh(sueloredon, material2);
   scene.add(csueloredon);
   csueloredon.position.set(0, 2.35, 0);
+
+  var pasillo = new THREE.CylinderGeometry(27, 27, 0.5, 20);
+  var colorp = new THREE.MeshBasicMaterial({ color: 0x808080 });
+  var pasillo1 = new THREE.Mesh(pasillo, colorp);
+  scene.add(pasillo1);
+  pasillo1.position.set(0, 1.15, 0);
 
   //base del soldado caido
   var basesoldado = new THREE.CylinderGeometry(7, 12, 6, 4);
@@ -412,21 +418,26 @@ function init() {
   pasto3.rotation.set(0, 1.45, 0);
 
   //acera
-  var colorcafe = new THREE.MeshBasicMaterial({ color: 0x808080 });
+  var coloracera = new THREE.MeshBasicMaterial({ color: 0x808080 });
   var acera = new THREE.BoxGeometry(15, 2, 100);
-  var ace1 = new THREE.Mesh(acera, colorcafe);
+  var ace1 = new THREE.Mesh(acera, coloracera);
   scene.add(ace1);
   ace1.position.set(34, 0, 2);
   ace1.rotation.set(0, -0.15, 0);
   var acera2 = new THREE.BoxGeometry(15, 2, 298);
-  var ace2 = new THREE.Mesh(acera2, colorcafe);
+  var ace2 = new THREE.Mesh(acera2, coloracera);
   scene.add(ace2);
   ace2.position.set(-100, 0, -40);
   ace2.rotation.set(0, Math.PI / 2, 0);
-  var ace3 = new THREE.Mesh(acera2, colorcafe);
+  var ace3 = new THREE.Mesh(acera2, coloracera);
   scene.add(ace3);
   ace3.position.set(-108, 0, 13);
   ace3.rotation.set(0, 1.26, 0);
+  var aceraF = new THREE.BoxGeometry(25, 2, 80);
+  var ace4 = new THREE.Mesh(aceraF, coloracera);
+  scene.add(ace4);
+  ace4.position.set(-278, -0.99, -43);
+  ace4.rotation.set(0, 1.35, 0);
 
   // luces
   var poste = new THREE.CylinderGeometry(0.2, 0.2, 40, 4);
@@ -442,6 +453,15 @@ function init() {
   var poste4 = new THREE.Mesh(poste, verdeoscuro);
   scene.add(poste4);
   poste4.position.set(-175, 3, -16);
+  var poste5 = new THREE.Mesh(poste, verdeoscuro);
+  scene.add(poste5);
+  poste5.position.set(-230, 3, -33.5);
+  var poste6 = new THREE.Mesh(poste, verdeoscuro);
+  scene.add(poste6);
+  poste6.position.set(25, 3, -33);
+  var poste7 = new THREE.Mesh(poste, verdeoscuro);
+  scene.add(poste7);
+  poste7.position.set(14, 3, 46);
 
   var foco = new THREE.SphereGeometry(1, 50, 5, 0, Math.PI * 2, 0, Math.PI * 2);
   var foco1 = new THREE.Mesh(foco, luz);
@@ -456,6 +476,15 @@ function init() {
   var foco4 = new THREE.Mesh(foco, luz);
   scene.add(foco4);
   foco4.position.set(-175, 22.5, -15.5);
+  var foco5 = new THREE.Mesh(foco, luz);
+  scene.add(foco5);
+  foco5.position.set(-230.5, 22, -33.5);
+  var foco6 = new THREE.Mesh(foco, luz);
+  scene.add(foco6);
+  foco6.position.set(25, 22.5, -33.5);
+  var foco7 = new THREE.Mesh(foco, luz);
+  scene.add(foco7);
+  foco7.position.set(14, 22.5, 46.5);
   // fin luces
   //fin plaza
 
