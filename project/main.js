@@ -24,6 +24,8 @@ var oscuro = new THREE.MeshBasicMaterial({ color: 0x04151f });
 var veis = new THREE.MeshBasicMaterial({ color: 0xd3b88c });
 var blancosu = new THREE.MeshBasicMaterial({ color: 0xf4f2f3 });
 var veispuerta = new THREE.MeshBasicMaterial({ color: 0xbca371 });
+var verdeoscuro = new THREE.MeshBasicMaterial({ color: 0x2d572c });
+var luz = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 // var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
 
 function init() {
@@ -396,11 +398,18 @@ function init() {
   scene.add(pasto);
   pasto.position.set(-13, -0.8, -1.5);
   pasto.rotation.set(0, 1.4, 0);
+
   var geometry6 = new THREE.BoxGeometry(65, 2, 60);
   var pasto2 = new THREE.Mesh(geometry6, verde);
   scene.add(pasto2);
   pasto2.position.set(-78, -0.8, -11.5);
   pasto2.rotation.set(0, 1.58, 0);
+
+  var geometry7 = new THREE.BoxGeometry(45, 2, 70);
+  var pasto3 = new THREE.Mesh(geometry7, verde);
+  scene.add(pasto3);
+  pasto3.position.set(-140, -0.8, -21.5);
+  pasto3.rotation.set(0, 1.45, 0);
 
   //acera
   var colorcafe = new THREE.MeshBasicMaterial({ color: 0x808080 });
@@ -419,6 +428,35 @@ function init() {
   ace3.position.set(-108, 0, 13);
   ace3.rotation.set(0, 1.26, 0);
 
+  // luces
+  var poste = new THREE.CylinderGeometry(0.2, 0.2, 40, 4);
+  var poste1 = new THREE.Mesh(poste, verdeoscuro);
+  scene.add(poste1);
+  poste1.position.set(-85, 3, -33);
+  var poste2 = new THREE.Mesh(poste, verdeoscuro);
+  scene.add(poste2);
+  poste2.position.set(-175, 3, -33);
+  var poste3 = new THREE.Mesh(poste, verdeoscuro);
+  scene.add(poste3);
+  poste3.position.set(-85, 3, 13);
+  var poste4 = new THREE.Mesh(poste, verdeoscuro);
+  scene.add(poste4);
+  poste4.position.set(-175, 3, -16);
+
+  var foco = new THREE.SphereGeometry(1, 50, 5, 0, Math.PI * 2, 0, Math.PI * 2);
+  var foco1 = new THREE.Mesh(foco, luz);
+  scene.add(foco1);
+  foco1.position.set(-85, 22.5, -33.5);
+  var foco2 = new THREE.Mesh(foco, luz);
+  scene.add(foco2);
+  foco2.position.set(-175, 22.5, -33.5);
+  var foco3 = new THREE.Mesh(foco, luz);
+  scene.add(foco3);
+  foco3.position.set(-85, 22.5, 13.5);
+  var foco4 = new THREE.Mesh(foco, luz);
+  scene.add(foco4);
+  foco4.position.set(-175, 22.5, -15.5);
+  // fin luces
   //fin plaza
 
   // fin bloques de henry
