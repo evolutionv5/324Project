@@ -7,7 +7,7 @@ var crate1, crateTexture1, crateNormalMap1, crateBumpMap1, createWall1;
 
 var keyboard = {};
 //height 1.8
-var player = { height: 5, speed: 1, turnSpeed: Math.PI * 0.02 };
+var player = { height: 10, speed: 1, turnSpeed: Math.PI * 0.02 };
 
 //colores
 var plomoclaro = new THREE.MeshBasicMaterial({ color: 0x9da3a4 });
@@ -218,27 +218,32 @@ function init() {
   var edificio = new THREE.BoxGeometry(3, 140, 90);
   var cubeedificio = new THREE.Mesh(edificio, veis);
   scene.add(cubeedificio);
-  cubeedificio.position.set(90, 35, 2);
+  cubeedificio.position.set(130, 35, 2);
+  cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
   //puerta de este edificio chica
   edificio = new THREE.BoxGeometry(2, 25, 30);
   cubeedificio = new THREE.Mesh(edificio, oscuro);
   scene.add(cubeedificio);
-  cubeedificio.position.set(88, 15, 2);
+  cubeedificio.position.set(127, 15, 2);
+  cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
   //frontis de la puerta grande
   edificio = new THREE.BoxGeometry(2, 53, 70);
   cubeedificio = new THREE.Mesh(edificio, veispuerta);
   scene.add(cubeedificio);
-  cubeedificio.position.set(89, 15, 2);
+  cubeedificio.position.set(128, 15, 2);
+  cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
   edificio = new THREE.BoxGeometry(2, 45, 55);
   cubeedificio = new THREE.Mesh(edificio, veis);
   scene.add(cubeedificio);
-  cubeedificio.position.set(88.5, 15, 2);
+  cubeedificio.position.set(128.5, 15, 2);
+  cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
   //ventanas
   // var edificio = new THREE.BoxGeometry( 2, 13 , 10 );
   // var cubeedificio = new THREE.Mesh( edificio, colorazul );
   // scene.add( cubeedificio );
   // cubeedificio.position.set(88,50, -30);
   var incre = -42.5;
+  var increvent = 143;
   for (let i = 0; i < 5; i++) {
     edificio = new THREE.BoxGeometry(2, 10, 8);
     cubeedificio = new THREE.Mesh(edificio, blancosu);
@@ -248,9 +253,13 @@ function init() {
     } else {
       incre += 12;
     }
-    cubeedificio.position.set(88, 47, incre);
+    increvent-=5;
+    cubeedificio.position.set(increvent, 47, incre);
+    cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
+    
   }
 
+  increvent = 143;
   incre = -42.5;
   for (let i = 0; i < 5; i++) {
     edificio = new THREE.BoxGeometry(2, 10, 8);
@@ -261,8 +270,11 @@ function init() {
     } else {
       incre += 12;
     }
-    cubeedificio.position.set(88, 68, incre);
+    increvent-=5;
+    cubeedificio.position.set(increvent, 68, incre);
+    cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
   }
+  increvent = 143;
   incre = -42.5;
   for (let i = 0; i < 5; i++) {
     edificio = new THREE.BoxGeometry(2, 10, 8);
@@ -273,7 +285,9 @@ function init() {
     } else {
       incre += 12;
     }
-    cubeedificio.position.set(88, 90, incre);
+    increvent-=5;
+    cubeedificio.position.set(increvent, 90, incre);
+    cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
   }
 
   //edificio ingenieria
@@ -346,7 +360,14 @@ function init() {
   cylinder.position.set(20, 2.5, 73);
   cylinder.rotation.set(0, 1.5, 1.5);
 
-  // aveni  da mariscal santa cruz
+  // avenida mariscal santa cruz
+ //piso de las dos vias el prado
+ plano(800, 120, plomoraton, 0, 0.05, 125, -0.5 * Math.PI, 0, 0);
+
+  // plano inclinado despues de la plaza
+  plano(700, 40, plomoraton, -100, 0.05, 45, -0.5 * Math.PI, 0, -0.1 * Math.PI);
+  
+  //mariscal
   plano(500, 40, plomoraton, 0, 0.05, 85, -0.5 * Math.PI, 0, 0);
   count = 250;
   for (let i = 0; i < 11; i++) {
@@ -354,10 +375,10 @@ function init() {
     count -= 50;
   }
   // calle para arriba izq
-  plano(30, 300, plomoraton, 65, 0.05, 85, -0.5 * Math.PI, 0, 0);
+  plano(60, 300, plomoraton, 60, 0.05, 85, -0.5 * Math.PI, 0, -0.05 * Math.PI);
 
   // calle para la camacho
-  plano(600, 35, plomoraton, 0, 0.05, -65, -0.5 * Math.PI, 0, 0);
+  plano(900, 35, plomoraton, 0, 0.05, -65, -0.5 * Math.PI, 0, 0);
   count = 240;
   for (let i = 0; i < 12; i++) {
     plano(20, 2, blanco, count, 0.06, -65, -0.5 * Math.PI, 0, 0);
@@ -387,6 +408,8 @@ function init() {
   scene.add(ace3);
   ace3.position.set(-48, 0, 26);
   ace3.rotation.set(0, 1.19, 0);
+
+
 
   //fin plaza
 
