@@ -129,7 +129,7 @@ function init() {
   material2 = new THREE.MeshBasicMaterial({ color: 0x555555 });
   var csueloredon = new THREE.Mesh(sueloredon, material2);
   scene.add(csueloredon);
-  csueloredon.position.set(0, -0.05, 0);
+  csueloredon.position.set(0, 2.35, 0);
 
   //base del soldado caido
   var basesoldado = new THREE.CylinderGeometry(7, 12, 6, 4);
@@ -219,24 +219,24 @@ function init() {
   var cubeedificio = new THREE.Mesh(edificio, veis);
   scene.add(cubeedificio);
   cubeedificio.position.set(130, 35, 2);
-  cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
+  cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   //puerta de este edificio chica
   edificio = new THREE.BoxGeometry(2, 25, 30);
   cubeedificio = new THREE.Mesh(edificio, oscuro);
   scene.add(cubeedificio);
   cubeedificio.position.set(127, 15, 2);
-  cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
+  cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   //frontis de la puerta grande
   edificio = new THREE.BoxGeometry(2, 53, 70);
   cubeedificio = new THREE.Mesh(edificio, veispuerta);
   scene.add(cubeedificio);
   cubeedificio.position.set(128, 15, 2);
-  cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
+  cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   edificio = new THREE.BoxGeometry(2, 45, 55);
   cubeedificio = new THREE.Mesh(edificio, veis);
   scene.add(cubeedificio);
   cubeedificio.position.set(128.5, 15, 2);
-  cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
+  cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   //ventanas
   // var edificio = new THREE.BoxGeometry( 2, 13 , 10 );
   // var cubeedificio = new THREE.Mesh( edificio, colorazul );
@@ -253,10 +253,9 @@ function init() {
     } else {
       incre += 12;
     }
-    increvent-=5;
+    increvent -= 5;
     cubeedificio.position.set(increvent, 47, incre);
-    cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
-    
+    cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   }
 
   increvent = 143;
@@ -270,9 +269,9 @@ function init() {
     } else {
       incre += 12;
     }
-    increvent-=5;
+    increvent -= 5;
     cubeedificio.position.set(increvent, 68, incre);
-    cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
+    cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   }
   increvent = 143;
   incre = -42.5;
@@ -285,9 +284,9 @@ function init() {
     } else {
       incre += 12;
     }
-    increvent-=5;
+    increvent -= 5;
     cubeedificio.position.set(increvent, 90, incre);
-    cubeedificio.rotation.set( 0, -0.1 * Math.PI, 0, 0, 0);
+    cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   }
 
   //edificio ingenieria
@@ -361,12 +360,12 @@ function init() {
   cylinder.rotation.set(0, 1.5, 1.5);
 
   // avenida mariscal santa cruz
- //piso de las dos vias el prado
- plano(800, 120, plomoraton, 0, 0.05, 125, -0.5 * Math.PI, 0, 0);
+  //piso de las dos vias el prado
+  plano(800, 120, plomoraton, 0, 0.05, 125, -0.5 * Math.PI, 0, 0);
 
   // plano inclinado despues de la plaza
   plano(700, 40, plomoraton, -100, 0.05, 45, -0.5 * Math.PI, 0, -0.1 * Math.PI);
-  
+
   //mariscal
   plano(500, 40, plomoraton, 0, 0.05, 85, -0.5 * Math.PI, 0, 0);
   count = 250;
@@ -386,30 +385,39 @@ function init() {
   }
 
   //Plaza
-  geometry = new THREE.CylinderGeometry(30, 80, 4, 3);
+  geometry = new THREE.CylinderGeometry(20, 20, 4, 3);
   cylinder = new THREE.Mesh(geometry, verde);
   scene.add(cylinder);
-  cylinder.position.set(-15, 0.5, 5);
-  cylinder.rotation.set(0, -0.5 * Math.PI, 0);
+  cylinder.position.set(-205, -1.4, -27.5);
+  cylinder.rotation.set(0, Math.PI / 2 + 0.8, 0);
+
+  var geometry5 = new THREE.BoxGeometry(80, 2, 80);
+  var pasto = new THREE.Mesh(geometry5, verde);
+  scene.add(pasto);
+  pasto.position.set(-13, -0.8, -1.5);
+  pasto.rotation.set(0, 1.4, 0);
+  var geometry6 = new THREE.BoxGeometry(65, 2, 60);
+  var pasto2 = new THREE.Mesh(geometry6, verde);
+  scene.add(pasto2);
+  pasto2.position.set(-78, -0.8, -11.5);
+  pasto2.rotation.set(0, 1.58, 0);
 
   //acera
-  var colorcafe = new THREE.MeshBasicMaterial({ color: 0x4b3621 });
+  var colorcafe = new THREE.MeshBasicMaterial({ color: 0x808080 });
   var acera = new THREE.BoxGeometry(15, 2, 100);
   var ace1 = new THREE.Mesh(acera, colorcafe);
   scene.add(ace1);
   ace1.position.set(34, 0, 2);
   ace1.rotation.set(0, -0.15, 0);
-  var acera2 = new THREE.BoxGeometry(15, 2, 170);
+  var acera2 = new THREE.BoxGeometry(15, 2, 298);
   var ace2 = new THREE.Mesh(acera2, colorcafe);
   scene.add(ace2);
-  ace2.position.set(-38, 0, -40);
+  ace2.position.set(-100, 0, -40);
   ace2.rotation.set(0, Math.PI / 2, 0);
   var ace3 = new THREE.Mesh(acera2, colorcafe);
   scene.add(ace3);
-  ace3.position.set(-48, 0, 26);
-  ace3.rotation.set(0, 1.19, 0);
-
-
+  ace3.position.set(-108, 0, 13);
+  ace3.rotation.set(0, 1.26, 0);
 
   //fin plaza
 
