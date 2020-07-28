@@ -29,6 +29,8 @@ var luz = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 var veisclaro = new THREE.MeshBasicMaterial({ color: 0xfdfcdc });
 var colortierra = new THREE.MeshBasicMaterial({ color: 0x4e3b31 });
 var colorladrillo = new THREE.MeshBasicMaterial({ color: 0xa85958 });
+var colornegro = new THREE.MeshBasicMaterial({ color: 0x000000 });
+var coloramarillo = new THREE.MeshBasicMaterial({ color: 0xf5d033 });
 
 function init() {
   scene = new THREE.Scene();
@@ -557,6 +559,49 @@ function init() {
   }
   // fin luces
   // fin jardinera
+
+  // semaforo
+  var semVertical = new THREE.Mesh(poste, verdeoscuro);
+  scene.add(semVertical);
+  semVertical.position.set(25, 13, 60);
+  var posteS = new THREE.CylinderGeometry(0.2, 0.2, 20, 4);
+  var semHorizontal = new THREE.Mesh(posteS, verdeoscuro);
+  scene.add(semHorizontal);
+  semHorizontal.position.set(25, 33, 70);
+  semHorizontal.rotation.set(Math.PI / 2, 0, 0);
+
+  var negroS = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  var caja = new THREE.BoxGeometry(0.5, 3.2, 7);
+  var caja1 = new THREE.Mesh(caja, coloramarillo);
+  scene.add(caja1);
+  caja1.position.set(25, 32, 80);
+  var cajan = new THREE.BoxGeometry(0.5, 3.4, 7.5);
+  var caja2 = new THREE.Mesh(cajan, negroS);
+  scene.add(caja2);
+  caja2.position.set(24.5, 32, 80);
+  // caja1.rotation.set(0, 1.248, 0);
+
+  var luzs = new THREE.SphereGeometry(
+    1,
+    10,
+    10,
+    0,
+    Math.PI * 2,
+    0,
+    Math.PI * 2
+  );
+  var rojoS = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+  var amarilloS = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+  var luzSemaforo1 = new THREE.Mesh(luzs, rojoS);
+  scene.add(luzSemaforo1);
+  luzSemaforo1.position.set(26, 32, 82);
+  var luzSemaforo2 = new THREE.Mesh(luzs, amarilloS);
+  scene.add(luzSemaforo2);
+  luzSemaforo2.position.set(26, 32, 80);
+  var luzSemaforo3 = new THREE.Mesh(luzs, verdeclaro);
+  scene.add(luzSemaforo3);
+  luzSemaforo3.position.set(26, 32, 78);
+  // fin semaforo
 
   // fin bloques de henry
 
