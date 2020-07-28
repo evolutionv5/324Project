@@ -837,17 +837,27 @@ function init() {
   var semVertical = new THREE.Mesh(poste, verdeoscuro);
   scene.add(semVertical);
   semVertical.position.set(25, 13, 60);
+  var semVertical2 = new THREE.Mesh(poste, verdeoscuro);
+  scene.add(semVertical2);
+  semVertical2.position.set(45, 13, -40);
   var posteS = new THREE.CylinderGeometry(0.2, 0.2, 20, 4);
   var semHorizontal = new THREE.Mesh(posteS, verdeoscuro);
   scene.add(semHorizontal);
   semHorizontal.position.set(25, 33, 70);
   semHorizontal.rotation.set(Math.PI / 2, 0, 0);
+  var semHorizontal2 = new THREE.Mesh(posteS, verdeoscuro);
+  scene.add(semHorizontal2);
+  semHorizontal2.position.set(45, 33, -50);
+  semHorizontal2.rotation.set(Math.PI / 2, 0, 0);
 
   var negroS = new THREE.MeshBasicMaterial({ color: 0x000000 });
   var caja = new THREE.BoxGeometry(0.5, 3.2, 7);
   var caja1 = new THREE.Mesh(caja, coloramarillo);
   scene.add(caja1);
   caja1.position.set(25, 32, 80);
+  var caja3 = new THREE.Mesh(caja, coloramarillo);
+  scene.add(caja3);
+  caja3.position.set(45, 32, -60);
   var cajan = new THREE.BoxGeometry(0.5, 3.4, 7.5);
   var caja2 = new THREE.Mesh(cajan, negroS);
   scene.add(caja2);
@@ -874,6 +884,17 @@ function init() {
   var luzSemaforo3 = new THREE.Mesh(luzs, verdeclaro);
   scene.add(luzSemaforo3);
   luzSemaforo3.position.set(26, 32, 78);
+
+  var luzSemaforo4 = new THREE.Mesh(luzs, rojoS);
+  scene.add(luzSemaforo4);
+  luzSemaforo4.position.set(46, 32, -58);
+  var luzSemaforo5 = new THREE.Mesh(luzs, amarilloS);
+  scene.add(luzSemaforo5);
+  luzSemaforo5.position.set(46, 32, -60);
+  var luzSemaforo6 = new THREE.Mesh(luzs, verdeclaro);
+  scene.add(luzSemaforo6);
+  luzSemaforo6.position.set(46, 32, -62);
+
   // fin semaforo
 
   // fin bloques de henry
