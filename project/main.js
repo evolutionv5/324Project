@@ -158,7 +158,7 @@ function init() {
   pasillo1.position.set(0, 1.15, 0);
 
   //base del soldado caido
-  var basesoldado = new THREE.CylinderGeometry(7, 12, 6, 4);
+  var basesoldado = new THREE.CylinderGeometry(7, 24, 6, 4);
   var colorazul = new THREE.MeshBasicMaterial({ color: 0xfff });
   var cbasesoldado = new THREE.Mesh(basesoldado, colorazul);
   cbasesoldado.receiveShadow = true;
@@ -406,10 +406,10 @@ function init() {
   }
 
   //edificio ingenieria
-  edificio = new THREE.BoxGeometry(280, 150, 3);
+  edificio = new THREE.BoxGeometry(280, 150, 80);
   cubeedificio = new THREE.Mesh(edificio, colornegro);
   scene.add(cubeedificio);
-  cubeedificio.position.set(-100, 60, -100);
+  cubeedificio.position.set(-100, 60, -140);
 
   //relleno
   edificio = new THREE.BoxGeometry(280, 150, 100);
