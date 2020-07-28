@@ -28,7 +28,12 @@ var verdeoscuro = new THREE.MeshPhongMaterial({ color: 0x2d572c, wireframe:false
 var luz = new THREE.MeshPhongMaterial({ color: 0xffff00, wireframe:false });
 var veisclaro = new THREE.MeshPhongMaterial({ color: 0xFDFCDC, wireframe:false });
 var plomoesta = new THREE.MeshPhongMaterial({ color: 0x54577C, wireframe:false });
-
+var colortierra = new THREE.MeshBasicMaterial({ color: 0x4e3b31 });
+var plomoclaro = new THREE.MeshBasicMaterial({ color: 0x9da3a4 });
+var verde = new THREE.MeshBasicMaterial({ color: 0x32965d });
+var verdeclaro = new THREE.MeshBasicMaterial({ color: 0x68a357 });
+var concreto = new THREE.MeshBasicMaterial({ color: 0x5f7367 });
+var blanco = new THREE.MeshBasicMaterial({ color: 0xffffff });
 function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 1000);
@@ -45,8 +50,8 @@ function init() {
   ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 	scene.add(ambientLight);
 	
-	light = new THREE.PointLight(0xffffff, 0.8, 500);
-	light.position.set(-3,30,-3);
+	light = new THREE.PointLight(0xffffff, 0.8, 1000);
+	light.position.set(0,50,3);
 	light.castShadow = true;
 	// Will not light anything closer than 0.1 units or further than 25 units
 	light.shadow.camera.near = 0.1;
@@ -74,12 +79,16 @@ function init() {
   //CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
   geometry = new THREE.CylinderGeometry(3, 9, 140, 4);
   var cylinder = new THREE.Mesh(geometry, material);
+  cylinder.receiveShadow = true;
+  cylinder.castShadow = true;
   scene.add(cylinder);
   cylinder.position.set(1.5, 70, 0);
   cylinder.rotation.set(0, 45, 0);
   var delmedio = new THREE.CylinderGeometry(3, 3, 100, 4);
   var colornegro = new THREE.MeshBasicMaterial({ color: 0xdddddd });
   var cmedio = new THREE.Mesh(delmedio, colornegro);
+  cmedio.receiveShadow = true;
+  cmedio.castShadow = true;
   scene.add(cmedio);
   cmedio.position.set(-2, 40, 0);
   cmedio.rotation.set(0, 0.45, -0.03);
@@ -87,48 +96,64 @@ function init() {
   geometry = new THREE.ConeGeometry(3.1, 3.5, 4);
   material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
   var cone = new THREE.Mesh(geometry, material);
+  cone.receiveShadow = true;
+  cone.castShadow = true;
   scene.add(cone);
   cone.position.set(1.5, 142, 0);
   cone.rotation.set(0, 45, 0);
   //la punta arriba
   var punta = new THREE.CylinderGeometry(0.2, 0.2, 40, 4);
   var cpunta = new THREE.Mesh(punta, colornegro);
+  cpunta.receiveShadow = true;
+  cpunta.castShadow = true;
   scene.add(cpunta);
   cpunta.position.set(-0.5, 145, 0);
   cpunta.rotation.set(0, 0, 0);
 
   //cilindro base
   //CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
-  var geometry1 = new THREE.CylinderGeometry(10, 10, 4, 20);
+  var geometry1 = new THREE.CylinderGeometry(16, 20, 15, 20);
   var material2 = new THREE.MeshBasicMaterial({ color: 0x555555 });
   var cylinder1 = new THREE.Mesh(geometry1, material2);
+  cylinder1.receiveShadow = true;
+  cylinder1.castShadow = true;
   scene.add(cylinder1);
   cylinder1.position.set(0, 0, 0);
-  var geometry2 = new THREE.CylinderGeometry(9, 10, 1, 20);
+  var geometry2 = new THREE.CylinderGeometry(13, 13, 3, 20);
   var material3 = new THREE.MeshBasicMaterial({ color: 0xfff });
-  var cylinder2 = new THREE.Mesh(geometry2, material3);
+  var cylinder2 = new THREE.Mesh(geometry2, verde);
+  cylinder2.receiveShadow = true;
+  cylinder2.castShadow = true;
   scene.add(cylinder2);
-  cylinder2.position.set(0, 2.5, 0);
-  var geometry3 = new THREE.CylinderGeometry(8, 9, 1, 20);
-  var cylinder3 = new THREE.Mesh(geometry3, material2);
+  cylinder2.position.set(0, 8, 0);
+  var geometry3 = new THREE.CylinderGeometry(13, 16, 2, 20);
+  var cylinder3 = new THREE.Mesh(geometry3, veis);
+  cylinder3.receiveShadow = true;
+  cylinder3.castShadow = true;
   scene.add(cylinder3);
-  cylinder3.position.set(0, 3, 0);
+  cylinder3.position.set(0, 8, 0);
   //nombre placa
-  var geometry4 = new THREE.CylinderGeometry(2.5, 2.5, 6, 20);
+  var geometry4 = new THREE.CylinderGeometry(8, 8, 10, 20);
   var cylinder4 = new THREE.Mesh(geometry4, material3);
+  cylinder4.receiveShadow = true;
+  cylinder4.castShadow = true;
   scene.add(cylinder4);
-  cylinder4.position.set(-1.8, 6, 0.5);
+  cylinder4.position.set(-1.8, 13, 0.5);
 
   //suelo redondo
   var sueloredon = new THREE.CylinderGeometry(20, 20, 0.5, 20);
   material2 = new THREE.MeshBasicMaterial({ color: 0x555555 });
   var csueloredon = new THREE.Mesh(sueloredon, material2);
+  csueloredon.receiveShadow = true;
+  csueloredon.castShadow = true;
   scene.add(csueloredon);
   csueloredon.position.set(0, 2.35, 0);
 
   var pasillo = new THREE.CylinderGeometry(27, 27, 0.5, 20);
   var colorp = new THREE.MeshBasicMaterial({ color: 0x808080 });
   var pasillo1 = new THREE.Mesh(pasillo, colorp);
+  pasillo1.receiveShadow = true;
+  pasillo1.castShadow = true;
   scene.add(pasillo1);
   pasillo1.position.set(0, 1.15, 0);
 
@@ -136,6 +161,8 @@ function init() {
   var basesoldado = new THREE.CylinderGeometry(7, 12, 6, 4);
   var colorazul = new THREE.MeshBasicMaterial({ color: 0xfff });
   var cbasesoldado = new THREE.Mesh(basesoldado, colorazul);
+  cbasesoldado.receiveShadow = true;
+  cbasesoldado.castShadow = true;
   scene.add(cbasesoldado);
   cbasesoldado.position.set(-35, 0, 0);
   cbasesoldado.rotation.set(0, 40, 0);
@@ -248,15 +275,61 @@ function init() {
   cubemanod.rotation.set(-1.5, 0, 1.8);
 
   //edificio
-  var edificio = new THREE.BoxGeometry(3, 140, 90);
+  
+
+  //pilares
+  var pilar = new THREE.BoxGeometry(15, 1, 50);
+  var cubepilar = new THREE.Mesh(pilar, plomoraton);
+  cubepilar.receiveShadow = true;
+	cubepilar.castShadow = true;
+  scene.add(cubepilar);
+  cubepilar.position.set(130, 30, 2);
+  cubepilar.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
+  //
+  var count = -11.5;
+  var countx = 135;
+  for (let i = 0; i < 4; i++) {
+    pilar = new THREE.BoxGeometry(15, 40, 2);
+    cubepilar = new THREE.Mesh(pilar, plomoraton);
+    cubepilar.receiveShadow = true;
+    cubepilar.castShadow = true;
+    cubepilar.position.set(countx, 20, count);
+    scene.add(cubepilar);
+    cubepilar.rotation.set(0, -0.1 * Math.PI, 0);
+    if(i==0 || i==3){
+      cubepilar.position.set(countx, 17, count);
+    }  else{
+      cubepilar.position.set(countx, 20, count);   
+    }
+    countx-=3;
+    count+=10;
+  }
+  // voulumen
+  var edificio = new THREE.BoxGeometry(100, 180, 90);
   var cubeedificio = new THREE.Mesh(edificio, veis);
+  cubeedificio.receiveShadow = true;
+	cubeedificio.castShadow = true;
+  scene.add(cubeedificio);
+  cubeedificio.position.set(190, 35, 4);
+  cubeedificio.rotation.set(0, 0, 0);
+  //
+  var edificio = new THREE.BoxGeometry(23, 180, 90);
+  var cubeedificio = new THREE.Mesh(edificio, veisclaro);
+  cubeedificio.receiveShadow = true;
+	cubeedificio.castShadow = true;
+  scene.add(cubeedificio);
+  cubeedificio.position.set(142, 35, 3 );
+  cubeedificio.rotation.set(0, -0.1 * Math.PI, 0);
+  ///
+  edificio = new THREE.BoxGeometry(3, 180, 90);
+  cubeedificio = new THREE.Mesh(edificio, veis);
   cubeedificio.receiveShadow = true;
 	cubeedificio.castShadow = true;
   scene.add(cubeedificio);
   cubeedificio.position.set(130, 35, 2);
   cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   //puerta de este edificio chica
-  edificio = new THREE.BoxGeometry(2, 25, 30);
+  edificio = new THREE.BoxGeometry(2, 40, 40);
   cubeedificio = new THREE.Mesh(edificio, oscuro);
   cubeedificio.receiveShadow = true;
 	cubeedificio.castShadow = true;
@@ -264,7 +337,7 @@ function init() {
   cubeedificio.position.set(127, 15, 2);
   cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   //frontis de la puerta grande
-  edificio = new THREE.BoxGeometry(2, 53, 70);
+  edificio = new THREE.BoxGeometry(2, 60, 70);
   cubeedificio = new THREE.Mesh(edificio, veispuerta);
   cubeedificio.receiveShadow = true;
 	cubeedificio.castShadow = true;
@@ -297,7 +370,7 @@ function init() {
       incre += 12;
     }
     increvent -= 5;
-    cubeedificio.position.set(increvent, 47, incre);
+    cubeedificio.position.set(increvent, 51, incre);
     cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   }
 
@@ -313,7 +386,7 @@ function init() {
       incre += 12;
     }
     increvent -= 5;
-    cubeedificio.position.set(increvent, 68, incre);
+    cubeedificio.position.set(increvent, 70, incre);
     cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   }
   increvent = 143;
@@ -328,7 +401,7 @@ function init() {
       incre += 12;
     }
     increvent -= 5;
-    cubeedificio.position.set(increvent, 90, incre);
+    cubeedificio.position.set(increvent, 92, incre);
     cubeedificio.rotation.set(0, -0.1 * Math.PI, 0, 0, 0);
   }
 
@@ -337,6 +410,12 @@ function init() {
   cubeedificio = new THREE.Mesh(edificio, colornegro);
   scene.add(cubeedificio);
   cubeedificio.position.set(-100, 60, -100);
+
+  //relleno
+  edificio = new THREE.BoxGeometry(280, 150, 100);
+  cubeedificio = new THREE.Mesh(edificio, colornegro);
+  scene.add(cubeedificio);
+  cubeedificio.position.set(-100, 60, -150);
 
   //barra de arriba
   edificio = new THREE.BoxGeometry(280, 8, 3);
@@ -364,6 +443,83 @@ function init() {
     cubeedificio.position.set(-100, count, -98);
     count -= 20;
   }
+
+  count = 38;
+  // BARRAS DE ABAJO
+  for (let i = 0; i < 10; i++) {
+    edificio = new THREE.BoxGeometry(4, 50, 3);
+    cubeedificio = new THREE.Mesh(edificio, verdeinge);
+    scene.add(cubeedificio);
+    cubeedificio.position.set(count, 10, -98);
+    count -= 30.6;
+  }  
+  // ventanas de abajo
+  count = 22;
+  for (let i = 0; i < 9; i++) {
+    edificio = new THREE.BoxGeometry(18, 5, 3);
+    cubeedificio = new THREE.Mesh(edificio, blanco);
+    if(i==3 || i==4){
+      
+    }else{
+      scene.add(cubeedificio);
+    }
+    
+    cubeedificio.position.set(count, 15, -98);
+    count -= 30.6;
+  } 
+//auto  uno
+edificio = new THREE.BoxGeometry(30, 14, 16);
+cubeedificio = new THREE.Mesh(edificio, azulm);
+cubeedificio.receiveShadow = true;
+cubeedificio.castShadow = true;
+scene.add(cubeedificio);
+cubeedificio.position.set(-100, 9, 40);
+cubeedificio.rotation.set(0, -0.1 * Math.PI, 0);
+//nariz
+edificio = new THREE.BoxGeometry(10, 6.5, 16);
+cubeedificio = new THREE.Mesh(edificio, azulm);
+cubeedificio.receiveShadow = true;
+cubeedificio.castShadow = true;
+scene.add(cubeedificio);
+cubeedificio.position.set(-117, 5, 35);
+cubeedificio.rotation.set(0, -0.1 * Math.PI, 0);
+ //ruedas
+  // delanteras
+  geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+  cylinder = new THREE.Mesh(geometry, oscuro);
+  cylinder.receiveShadow = true;
+	cylinder.castShadow = true;
+  scene.add(cylinder);
+  cylinder.position.set(-118, 2.5, 43);
+  cylinder.rotation.set(-0.5 * Math.PI, -0.3 * Math.PI, 0);
+
+  geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+  cylinder = new THREE.Mesh(geometry, oscuro);
+  cylinder.receiveShadow = true;
+	cylinder.castShadow = true;
+  scene.add(cylinder);
+  cylinder.position.set(-95, 2.5, 50);
+  cylinder.rotation.set(-0.5 * Math.PI, -0.3 * Math.PI, 0);
+  
+  //traseras
+  geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+  cylinder = new THREE.Mesh(geometry, oscuro);
+  cylinder.receiveShadow = true;
+	cylinder.castShadow = true;
+  scene.add(cylinder);
+  cylinder.position.set(-90, 2.5, 35);
+  cylinder.rotation.set(-0.5 * Math.PI, -0.3 * Math.PI, 0);
+  
+
+  geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+  cylinder = new THREE.Mesh(geometry, oscuro);
+  cylinder.receiveShadow = true;
+	cylinder.castShadow = true;
+  scene.add(cylinder);
+  cylinder.position.set(-110, 2.5, 27);
+  cylinder.rotation.set(-0.5 * Math.PI, -0.3 * Math.PI, 0);
+  
+
 
   //auto
   edificio = new THREE.BoxGeometry(30, 14, 16);
@@ -414,6 +570,56 @@ function init() {
   cylinder.position.set(20, 2.5, 73);
   cylinder.rotation.set(0, 1.5, 1.5);
 
+  //MINIBUS
+  edificio = new THREE.BoxGeometry(30, 14, 16);
+  cubeedificio = new THREE.Mesh(edificio, azulm);
+  cubeedificio.receiveShadow = true;
+  cubeedificio.castShadow = true;
+  scene.add(cubeedificio);
+  cubeedificio.position.set(-89, 9, 162);
+  cubeedificio.rotation.set(0, -0.08 * Math.PI, 0);
+  //nariz
+  basesoldado = new THREE.CylinderGeometry(7, 9, 7, 4);
+  cbasesoldado = new THREE.Mesh(basesoldado, blancosu);
+  cbasesoldado.receiveShadow = true;
+  cbasesoldado.castShadow = true;
+  scene.add(cbasesoldado);
+  cbasesoldado.position.set(-100, 11, 159);
+  cbasesoldado.rotation.set(0, 0.2*Math.PI, 0);
+  //traseras
+  geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+  cylinder = new THREE.Mesh(geometry, oscuro);
+  cylinder.receiveShadow = true;
+	cylinder.castShadow = true;
+  scene.add(cylinder);
+  cylinder.position.set(-80, 2.5, 172);
+  cylinder.rotation.set(0, 1.5, 1.5);
+
+  geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+  cylinder = new THREE.Mesh(geometry, oscuro);
+  cylinder.receiveShadow = true;
+	cylinder.castShadow = true;
+  scene.add(cylinder);
+  cylinder.position.set(-80, 2.5, 157);
+  cylinder.rotation.set(0, 1.5, 1.5);
+  //delanteras
+  geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+  cylinder = new THREE.Mesh(geometry, oscuro);
+  cylinder.receiveShadow = true;
+	cylinder.castShadow = true;
+  scene.add(cylinder);
+  cylinder.position.set(-100, 2.5, 168);
+  cylinder.rotation.set(0, 1.5, 1.5);
+
+  geometry = new THREE.CylinderGeometry(3, 3, 3, 20);
+  cylinder = new THREE.Mesh(geometry, oscuro);
+  cylinder.receiveShadow = true;
+	cylinder.castShadow = true;
+  scene.add(cylinder);
+  cylinder.position.set(-95, 2.5, 152);
+  cylinder.rotation.set(0, 1.5, 1.5);
+
+
   // avenida mariscal santa cruz
   //piso de las dos vias el prado
   plano(800, 120, plomoraton, 0, 0.05, 125, -0.5 * Math.PI, 0, 0);
@@ -448,10 +654,18 @@ function init() {
 
   //piso de jardinera
   plano(500, 40, veisclaro, -250, 0.1, 79, -0.5 * Math.PI, 0, -0.1 * Math.PI);
-// plano inclinado DERECHA
-  plano(700, 80, plomoraton, -100, 0.06, 190, -0.5 * Math.PI, 0, -0.1 * Math.PI);
-
-
+  // plano inclinado DERECHA
+  plano(
+    700,
+    80,
+    plomoraton,
+    -100,
+    0.06,
+    190,
+    -0.5 * Math.PI,
+    0,
+    -0.1 * Math.PI
+  );
 
   //Plaza
   geometry = new THREE.CylinderGeometry(20, 20, 4, 3);
@@ -548,6 +762,53 @@ function init() {
   foco7.position.set(14, 22.5, 46.5);
   // fin luces
   //fin plaza
+
+  // jardinera
+  var jardin = new THREE.BoxGeometry(14, 7, 398);
+  var centro = new THREE.Mesh(jardin, coloracera);
+  scene.add(centro);
+  centro.position.set(-220, 0, 87);
+  centro.rotation.set(0, 1.248, 0);
+  var tierra = new THREE.BoxGeometry(10, 7.2, 394);
+  var centrot = new THREE.Mesh(tierra, colortierra);
+  scene.add(centrot);
+  centrot.position.set(-220, 0, 87);
+  centrot.rotation.set(0, 1.248, 0);
+  // plantas
+  var planta = new THREE.SphereGeometry(
+    6,
+    50,
+    9,
+    0,
+    Math.PI * 2,
+    0,
+    Math.PI * 2
+  );
+  for (let i = 0; i < 14; i++) {
+    var planta1 = new THREE.Mesh(planta, verdeclaro);
+    scene.add(planta1);
+    planta1.position.set(-384 + i * 26, 6.4, 31.2 + i * 8.8);
+  }
+  // fin plantas
+  // luces
+  var posteh = new THREE.CylinderGeometry(0.2, 0.2, 16, 4);
+  for (let i = 0; i < 4; i++) {
+    var postev = new THREE.Mesh(poste, verdeoscuro);
+    scene.add(postev);
+    postev.position.set(-385 + i * 110, 15, 34 + i * 35.6);
+    var posteh1 = new THREE.Mesh(posteh, verdeoscuro);
+    scene.add(posteh1);
+    posteh1.position.set(-385 + i * 110, 35, 34 + i * 35.6);
+    posteh1.rotation.set(Math.PI / 2, 0, 0.55 + Math.PI * 2);
+    var focoj1 = new THREE.Mesh(foco, luz);
+    scene.add(focoj1);
+    focoj1.position.set(-381 + i * 110, 34.2, 27 + i * 35.6);
+    var focoj2 = new THREE.Mesh(foco, luz);
+    scene.add(focoj2);
+    focoj2.position.set(-389 + i * 110, 34.2, 41 + i * 35.6);
+  }
+  // fin luces
+  // fin jardinera
 
   // fin bloques de henry
 
