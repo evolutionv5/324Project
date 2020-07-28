@@ -26,7 +26,7 @@ var blancosu = new THREE.MeshBasicMaterial({ color: 0xf4f2f3 });
 var veispuerta = new THREE.MeshBasicMaterial({ color: 0xbca371 });
 var verdeoscuro = new THREE.MeshBasicMaterial({ color: 0x2d572c });
 var luz = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-// var material = new THREE.MeshBasicMaterial({ color: 0x444444 });
+var veisclaro = new THREE.MeshBasicMaterial({ color: 0xFDFCDC });
 
 function init() {
   scene = new THREE.Scene();
@@ -372,12 +372,12 @@ function init() {
   plano(800, 120, plomoraton, 0, 0.05, 125, -0.5 * Math.PI, 0, 0);
 
   // plano inclinado despues de la plaza
-  plano(700, 40, plomoraton, -100, 0.05, 45, -0.5 * Math.PI, 0, -0.1 * Math.PI);
+  plano(700, 80, plomoraton, -100, 0.05, 65, -0.5 * Math.PI, 0, -0.1 * Math.PI);
 
   //mariscal
   plano(500, 40, plomoraton, 0, 0.05, 85, -0.5 * Math.PI, 0, 0);
   count = 250;
-  for (let i = 0; i < 11; i++) {
+  for (let i = 0; i < 3; i++) {
     plano(20, 2, blanco, count, 0.06, 85, -0.5 * Math.PI, 0, 0);
     count -= 50;
   }
@@ -391,6 +391,19 @@ function init() {
     plano(20, 2, blanco, count, 0.06, -65, -0.5 * Math.PI, 0, 0);
     count -= 50;
   }
+
+  //paso de zebra
+  for (let i = 0; i < 12; i++) {
+    plano(10, 3, blanco, count, 0.06, -65, -0.5 * Math.PI, 0, 0);
+    count -= 50;
+  }
+
+  //piso de jardinera
+  plano(500, 40, veisclaro, -250, 0.1, 79, -0.5 * Math.PI, 0, -0.1 * Math.PI);
+// plano inclinado DERECHA
+  plano(700, 80, plomoraton, -100, 0.06, 190, -0.5 * Math.PI, 0, -0.1 * Math.PI);
+
+
 
   //Plaza
   geometry = new THREE.CylinderGeometry(20, 20, 4, 3);
