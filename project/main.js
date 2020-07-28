@@ -28,6 +28,7 @@ var verdeoscuro = new THREE.MeshBasicMaterial({ color: 0x2d572c });
 var luz = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 var veisclaro = new THREE.MeshBasicMaterial({ color: 0xfdfcdc });
 var colortierra = new THREE.MeshBasicMaterial({ color: 0x4e3b31 });
+var colorladrillo = new THREE.MeshBasicMaterial({ color: 0xa85958 });
 
 function init() {
   scene = new THREE.Scene();
@@ -141,9 +142,9 @@ function init() {
   pasillo1.position.set(0, 1.15, 0);
 
   //base del soldado caido
-  var basesoldado = new THREE.CylinderGeometry(7, 12, 6, 4);
+  var basesoldado = new THREE.CylinderGeometry(7, 24, 6, 4);
   var colorazul = new THREE.MeshBasicMaterial({ color: 0xfff });
-  var cbasesoldado = new THREE.Mesh(basesoldado, colorazul);
+  var cbasesoldado = new THREE.Mesh(basesoldado, colorladrillo);
   scene.add(cbasesoldado);
   cbasesoldado.position.set(-35, 0, 0);
   cbasesoldado.rotation.set(0, 40, 0);
@@ -152,7 +153,7 @@ function init() {
   //BoxGeometry(width : Float, height : Float, depth : Float, widthSegments : Integer, heightSegments : Integer, depthSegments : Integer)
   var torzo = new THREE.BoxGeometry(6, 2, 4);
   var matorzo = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  var cubetorzo = new THREE.Mesh(torzo, matorzo);
+  var cubetorzo = new THREE.Mesh(torzo, colorladrillo);
   scene.add(cubetorzo);
   cubetorzo.position.set(-35, 4, 0);
   cubetorzo.rotation.set(0, 0, 0);
@@ -299,10 +300,10 @@ function init() {
   }
 
   //edificio ingenieria
-  edificio = new THREE.BoxGeometry(280, 150, 3);
+  edificio = new THREE.BoxGeometry(280, 150, 80);
   cubeedificio = new THREE.Mesh(edificio, colornegro);
   scene.add(cubeedificio);
-  cubeedificio.position.set(-100, 60, -100);
+  cubeedificio.position.set(-100, 60, -140);
 
   //barra de arriba
   edificio = new THREE.BoxGeometry(280, 8, 3);
