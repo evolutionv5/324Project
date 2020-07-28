@@ -8,9 +8,7 @@
 
 #### 2020
 
-horizontal 11 lineas
-vertical 17 lineas
-
-req funcionales
-no funcionales
-herramientas
+![inge](project/images/inge.JPG)
+![obelisco](project/images/obelisco.JPG)
+![semaforo](project/images/semaforo.JPG)
+![soldado](project/images/soldado.JPG)
