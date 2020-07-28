@@ -26,7 +26,8 @@ var blancosu = new THREE.MeshBasicMaterial({ color: 0xf4f2f3 });
 var veispuerta = new THREE.MeshBasicMaterial({ color: 0xbca371 });
 var verdeoscuro = new THREE.MeshBasicMaterial({ color: 0x2d572c });
 var luz = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-var veisclaro = new THREE.MeshBasicMaterial({ color: 0xFDFCDC });
+var veisclaro = new THREE.MeshBasicMaterial({ color: 0xfdfcdc });
+var colortierra = new THREE.MeshBasicMaterial({ color: 0x4e3b31 });
 
 function init() {
   scene = new THREE.Scene();
@@ -400,10 +401,18 @@ function init() {
 
   //piso de jardinera
   plano(500, 40, veisclaro, -250, 0.1, 79, -0.5 * Math.PI, 0, -0.1 * Math.PI);
-// plano inclinado DERECHA
-  plano(700, 80, plomoraton, -100, 0.06, 190, -0.5 * Math.PI, 0, -0.1 * Math.PI);
-
-
+  // plano inclinado DERECHA
+  plano(
+    700,
+    80,
+    plomoraton,
+    -100,
+    0.06,
+    190,
+    -0.5 * Math.PI,
+    0,
+    -0.1 * Math.PI
+  );
 
   //Plaza
   geometry = new THREE.CylinderGeometry(20, 20, 4, 3);
@@ -500,6 +509,53 @@ function init() {
   foco7.position.set(14, 22.5, 46.5);
   // fin luces
   //fin plaza
+
+  // jardinera
+  var jardin = new THREE.BoxGeometry(14, 7, 398);
+  var centro = new THREE.Mesh(jardin, coloracera);
+  scene.add(centro);
+  centro.position.set(-220, 0, 87);
+  centro.rotation.set(0, 1.248, 0);
+  var tierra = new THREE.BoxGeometry(10, 7.2, 394);
+  var centrot = new THREE.Mesh(tierra, colortierra);
+  scene.add(centrot);
+  centrot.position.set(-220, 0, 87);
+  centrot.rotation.set(0, 1.248, 0);
+  // plantas
+  var planta = new THREE.SphereGeometry(
+    6,
+    50,
+    9,
+    0,
+    Math.PI * 2,
+    0,
+    Math.PI * 2
+  );
+  for (let i = 0; i < 14; i++) {
+    var planta1 = new THREE.Mesh(planta, verdeclaro);
+    scene.add(planta1);
+    planta1.position.set(-384 + i * 26, 6.4, 31.2 + i * 8.8);
+  }
+  // fin plantas
+  // luces
+  var posteh = new THREE.CylinderGeometry(0.2, 0.2, 16, 4);
+  for (let i = 0; i < 4; i++) {
+    var postev = new THREE.Mesh(poste, verdeoscuro);
+    scene.add(postev);
+    postev.position.set(-385 + i * 110, 15, 34 + i * 35.6);
+    var posteh1 = new THREE.Mesh(posteh, verdeoscuro);
+    scene.add(posteh1);
+    posteh1.position.set(-385 + i * 110, 35, 34 + i * 35.6);
+    posteh1.rotation.set(Math.PI / 2, 0, 0.55 + Math.PI * 2);
+    var focoj1 = new THREE.Mesh(foco, luz);
+    scene.add(focoj1);
+    focoj1.position.set(-381 + i * 110, 34.2, 27 + i * 35.6);
+    var focoj2 = new THREE.Mesh(foco, luz);
+    scene.add(focoj2);
+    focoj2.position.set(-389 + i * 110, 34.2, 41 + i * 35.6);
+  }
+  // fin luces
+  // fin jardinera
 
   // fin bloques de henry
 
