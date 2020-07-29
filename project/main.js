@@ -10,32 +10,6 @@ var keyboard = {};
 var player = { height: 10, speed: 1, turnSpeed: Math.PI * 0.02 };
 
 //colores
-<<<<<<< HEAD
-var plomoclaro = new THREE.MeshPhongMaterial({ color: 0x9da3a4 , wireframe:false });
-var verde = new THREE.MeshPhongMaterial({ color: 0x32965d, wireframe:false });
-var verdeclaro = new THREE.MeshPhongMaterial({ color: 0x68a357, wireframe:false });
-var concreto = new THREE.MeshPhongMaterial({ color: 0x5f7367, wireframe:false });
-var blanco = new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe:false });
-
-var plomoraton = new THREE.MeshPhongMaterial({ color: 0x59656f, wireframe:false });
-var verdeinge = new THREE.MeshPhongMaterial({ color: 0x216869, wireframe:false });
-var rojop = new THREE.MeshPhongMaterial({ color: 0xac3931, wireframe:false });
-var azulm = new THREE.MeshPhongMaterial({ color: 0x2374ab, wireframe:false });
-var oscuro = new THREE.MeshPhongMaterial({ color: 0x04151f, wireframe:false });
-var veis = new THREE.MeshPhongMaterial({ color: 0xd3b88c, wireframe:false });
-var blancosu = new THREE.MeshPhongMaterial({ color: 0xf4f2f3, wireframe:false });
-var veispuerta = new THREE.MeshPhongMaterial({ color: 0xbca371, wireframe:false });
-var verdeoscuro = new THREE.MeshPhongMaterial({ color: 0x2d572c, wireframe:false });
-var luz = new THREE.MeshPhongMaterial({ color: 0xffff00, wireframe:false });
-var veisclaro = new THREE.MeshPhongMaterial({ color: 0xFDFCDC, wireframe:false });
-var plomoesta = new THREE.MeshPhongMaterial({ color: 0x54577C, wireframe:false });
-var colortierra = new THREE.MeshPhongMaterial({ color: 0x4e3b31, wireframe:false });
-var plomoclaro = new THREE.MeshPhongMaterial({ color: 0x9da3a4, wireframe:false });
-var verde = new THREE.MeshPhongMaterial({ color: 0x32965d, wireframe:false });
-var verdeclaro = new THREE.MeshPhongMaterial({ color: 0x68a357, wireframe:false });
-var concreto = new THREE.MeshPhongMaterial({ color: 0x5f7367, wireframe:false });
-var blanco = new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe:false });
-=======
 var plomoclaro = new THREE.MeshPhongMaterial({
   color: 0x9da3a4,
   wireframe: false,
@@ -91,7 +65,6 @@ var verde = new THREE.MeshBasicMaterial({ color: 0x32965d });
 var verdeclaro = new THREE.MeshBasicMaterial({ color: 0x68a357 });
 var concreto = new THREE.MeshBasicMaterial({ color: 0x5f7367 });
 var blanco = new THREE.MeshBasicMaterial({ color: 0xffffff });
->>>>>>> b35c7993025e4d1337a8e5e0a2d2634cdcb5823b
 function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 1000);
@@ -190,7 +163,7 @@ function init() {
   cylinder3.position.set(0, 8, 0);
   //nombre placa
   var geometry4 = new THREE.CylinderGeometry(8, 8, 10, 20);
-  var cylinder4 = new THREE.Mesh(geometry4, plomoesta);
+  var cylinder4 = new THREE.Mesh(geometry4, material3);
   cylinder4.receiveShadow = true;
   cylinder4.castShadow = true;
   scene.add(cylinder4);
@@ -222,28 +195,6 @@ function init() {
   scene.add(cbasesoldado);
   cbasesoldado.position.set(-35, 0, 0);
   cbasesoldado.rotation.set(0, 40, 0);
-
-<<<<<<< HEAD
-    //Mesh
-    var mesh = new THREE.Mesh(
-      new THREE.BoxGeometry(10,10,10),
-      new THREE.MeshPhongMaterial({color:0xff4444, wireframe:false})
-    );
-    mesh.position.set(20, 20,20);
-    mesh.receiveShadow = true;
-	  mesh.castShadow = true;
-	  //scene.add(mesh);
-=======
-  //Mesh
-  var mesh = new THREE.Mesh(
-    new THREE.BoxGeometry(10, 10, 10),
-    new THREE.MeshPhongMaterial({ color: 0xff4444, wireframe: false })
-  );
-  mesh.position.set(20, 20, 20);
-  mesh.receiveShadow = true;
-  mesh.castShadow = true;
-  scene.add(mesh);
->>>>>>> b35c7993025e4d1337a8e5e0a2d2634cdcb5823b
 
   //piedras del Soldado caido
   //BoxGeometry(width : Float, height : Float, depth : Float, widthSegments : Integer, heightSegments : Integer, depthSegments : Integer)
