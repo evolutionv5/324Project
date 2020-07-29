@@ -28,12 +28,12 @@ var verdeoscuro = new THREE.MeshPhongMaterial({ color: 0x2d572c, wireframe:false
 var luz = new THREE.MeshPhongMaterial({ color: 0xffff00, wireframe:false });
 var veisclaro = new THREE.MeshPhongMaterial({ color: 0xFDFCDC, wireframe:false });
 var plomoesta = new THREE.MeshPhongMaterial({ color: 0x54577C, wireframe:false });
-var colortierra = new THREE.MeshBasicMaterial({ color: 0x4e3b31 });
-var plomoclaro = new THREE.MeshBasicMaterial({ color: 0x9da3a4 });
-var verde = new THREE.MeshBasicMaterial({ color: 0x32965d });
-var verdeclaro = new THREE.MeshBasicMaterial({ color: 0x68a357 });
-var concreto = new THREE.MeshBasicMaterial({ color: 0x5f7367 });
-var blanco = new THREE.MeshBasicMaterial({ color: 0xffffff });
+var colortierra = new THREE.MeshPhongMaterial({ color: 0x4e3b31, wireframe:false });
+var plomoclaro = new THREE.MeshPhongMaterial({ color: 0x9da3a4, wireframe:false });
+var verde = new THREE.MeshPhongMaterial({ color: 0x32965d, wireframe:false });
+var verdeclaro = new THREE.MeshPhongMaterial({ color: 0x68a357, wireframe:false });
+var concreto = new THREE.MeshPhongMaterial({ color: 0x5f7367, wireframe:false });
+var blanco = new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe:false });
 function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 1000);
@@ -134,7 +134,7 @@ function init() {
   cylinder3.position.set(0, 8, 0);
   //nombre placa
   var geometry4 = new THREE.CylinderGeometry(8, 8, 10, 20);
-  var cylinder4 = new THREE.Mesh(geometry4, material3);
+  var cylinder4 = new THREE.Mesh(geometry4, plomoesta);
   cylinder4.receiveShadow = true;
   cylinder4.castShadow = true;
   scene.add(cylinder4);
@@ -175,7 +175,7 @@ function init() {
     mesh.position.set(20, 20,20);
     mesh.receiveShadow = true;
 	  mesh.castShadow = true;
-	  scene.add(mesh);
+	  //scene.add(mesh);
 
   //piedras del Soldado caido
   //BoxGeometry(width : Float, height : Float, depth : Float, widthSegments : Integer, heightSegments : Integer, depthSegments : Integer)
